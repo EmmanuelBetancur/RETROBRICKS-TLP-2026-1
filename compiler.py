@@ -58,27 +58,71 @@ class Parser:
         self.ast['config']['grid_size'] = [ancho, alto]
 
     def parsear_shape(self):
-        self.consumir('DEFINE')
-        self.consumir('SHAPE')
-        nombre_shape = self.consumir()
-        self.consumir(':')
-        estados = []
-        while self.posicion < len(self.tokens) and self.tokens[self.posicion] == 'STATE':
+     self.consumir('DEFINE')
+     self.consumir('SHAPE')
+
+     nombre_shape = self.consumir()
+
+     self.consumir(':')
+
+     estados = []
+
+   
+     chance = 1
+
+   
+     while self.posicion < len(self.tokens) and self.tokens[self.posicion] != 'END':
+
+       
+        if self.tokens[self.posicion] == 'CHANCE':
+
+            self.consumir('CHANCE')
+
+            chance = int(self.consumir())
+
+        
+        elif self.tokens[self.posicion] == 'STATE':
+
             self.consumir('STATE')
+
             self.consumir()
+
             self.consumir(':')
+
             matriz = []
+
             while self.posicion < len(self.tokens) and self.tokens[self.posicion] == '[':
+
                 fila = []
+
                 self.consumir('[')
+
                 while self.tokens[self.posicion] != ']':
+
                     fila.append(int(self.consumir()))
-                    if self.tokens[self.posicion] == ',': self.consumir(',')
+
+                    if self.tokens[self.posicion] == ',':
+                        self.consumir(',')
+
                 self.consumir(']')
+
                 matriz.append(fila)
+
             estados.append(matriz)
-        self.consumir('END')
-        self.ast['shapes'][nombre_shape] = estados
+
+        else:
+            raise SyntaxError(
+                "Se esperaba STATE o CHANCE y se encontro '{}'".format(
+                    self.tokens[self.posicion]
+                )
+            )
+
+     self.consumir('END')
+
+     self.ast['shapes'][nombre_shape] = {
+        'states': estados,
+        'chance': chance
+    }
 
     # --- FUNCION CORREGIDA ---
     def parsear_evento(self):

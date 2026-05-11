@@ -183,11 +183,57 @@ class Juego:
     # ---------------------------------------------------------------------
 
     def tetris_spawn_pieza(self):
-        nombre_pieza = random.choice(self.datos_juego['shapes'].keys())
-        self.pieza_actual = self.datos_juego['shapes'][nombre_pieza]
-        self.pieza_x, self.pieza_y, self.pieza_rotacion = self.ancho / 2 - 2, 0, 0
-        if self.tetris_verificar_colision(self.pieza_x, self.pieza_y, self.pieza_rotacion):
-            self.juego_terminado = True
+
+     shapes = self.datos_juego['shapes']
+
+     # -------------------------
+     # Calcular suma total
+     # de probabilidades
+     # -------------------------
+     total_chance = 0
+
+     for nombre in shapes:
+        total_chance += shapes[nombre]['chance']
+
+     # -------------------------
+     # Generar numero aleatorio
+     # -------------------------
+     numero = random.randint(1, total_chance)
+
+     # -------------------------
+     # Seleccion ponderada
+     # -------------------------
+     acumulado = 0
+
+     for nombre in shapes:
+
+        acumulado += shapes[nombre]['chance']
+
+        if numero <= acumulado:
+            nombre_pieza = nombre
+            break
+
+     # -------------------------
+     # Obtener estados
+     # -------------------------
+     self.pieza_actual = shapes[nombre_pieza]['states']
+
+     # -------------------------
+     # Posicion inicial
+     # -------------------------
+     self.pieza_x = self.ancho / 2 - 2
+     self.pieza_y = 0
+     self.pieza_rotacion = 0
+
+     # -------------------------
+     # Verificar colision
+     # -------------------------
+     if self.tetris_verificar_colision(
+        self.pieza_x,
+        self.pieza_y,
+        self.pieza_rotacion
+     ):
+        self.juego_terminado = True
 
     def tetris_mover_pieza(self, direccion):
         if not self.pieza_actual: return

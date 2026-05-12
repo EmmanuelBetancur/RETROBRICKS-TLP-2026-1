@@ -26,7 +26,7 @@
 <acciones_tetris>    ::= <accion_tetris> | <accion_tetris> <acciones_tetris>
 
 <accion_tetris> ::= <accion_spawn> | <accion_mover> | <accion_rotar> | <accion_puntos>
-<accion_spawn>  ::= "SPAWN" "RANDOM_SHAPE"
+<accion_spawn>  ::= "SPAWN" <color>
 <accion_mover>  ::= "MOVE" "CURRENT_PIECE" <direccion>
 <accion_rotar>  ::= "ROTATE" "CURRENT_PIECE"
 <accion_puntos> ::= "INCREASE_SCORE" <numero>
@@ -36,3 +36,4 @@
 <numero>        ::= <digito> | <digito> <numero>
 <letra>         ::= "A"..."Z" | "_"
 <digito>        ::= "0"..."9"
+<color>         ::= "Hexadecimal"

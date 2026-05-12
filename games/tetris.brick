@@ -55,9 +55,18 @@ DEFINE SHAPE T_PIECE:
     [0, 1, 0]
 END
 
+DEFINE SHAPE POWER_UP_PIECE:
+  STATE 1:
+    [1]
+END
+
 # --- Logica y Reglas ---
 ON START:
   SPAWN RANDOM_SHAPE
+END
+
+ON COMBO:
+  SPAWN POWER_UP
 END
 
 # ON_TICK es el evento que controla la gravedad

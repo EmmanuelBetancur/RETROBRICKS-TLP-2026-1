@@ -1,5 +1,15 @@
 {
   "shapes": {
+    "POWER_UP_PIECE": {
+      "states": [
+        [
+          [
+            1
+          ]
+        ]
+      ], 
+      "chance": 1
+    }, 
     "T_PIECE": {
       "states": [
         [
@@ -235,6 +245,13 @@
         ], 
         "accion": "MOVE", 
         "objeto": "CURRENT_PIECE"
+      }
+    ], 
+    "ON_COMBO": [
+      {
+        "params": [], 
+        "accion": "SPAWN", 
+        "objeto": "POWER_UP"
       }
     ], 
     "ON_LINE_CLEAR": [

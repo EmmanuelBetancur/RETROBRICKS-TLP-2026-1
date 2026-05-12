@@ -168,7 +168,9 @@ class Juego:
                 if verbo == 'GAME_OVER': self.juego_terminado = True
 
                 if self.tipo_juego == 'TETRIS':
-                    if verbo == 'SPAWN': self.tetris_spawn_pieza()
+                    if verbo == 'SPAWN' : 
+                      if objeto == "POWER_UP" : self.tetris_spawn_pieza("POWER_UP")
+                      else: self.tetris_spawn_pieza()
                     if verbo == 'MOVE': self.tetris_mover_pieza(accion['params'][0])
                     if verbo == 'ROTATE': self.tetris_rotar_pieza()
                 
@@ -182,30 +184,46 @@ class Juego:
     # METODOS DE LOGICA DE JUEGO (MANTENIDOS DEL ARCHIVO ORIGINAL)
     # ---------------------------------------------------------------------
 
-    def tetris_spawn_pieza(self):
-
-     shapes = self.datos_juego['shapes']
+    def tetris_spawn_pieza(self, tipo_spawn = "NORMAL"):
+      
+      shapes = self.datos_juego['shapes']
+      
+      filtradas = {}
+      
+      if tipo_spawn == "POWER_UP":
+      
+        for k, v in shapes.items():
+          if k == "POWER_UP_PIECE":
+            filtradas[k] = v
+      
+      else:
+      
+        for k, v in shapes.items():
+          if k != "POWER_UP_PIECE":
+            filtradas[k] = v
+      
+      shapes = filtradas
 
      # -------------------------
      # Calcular suma total
      # de probabilidades
      # -------------------------
-     total_chance = 0
+      total_chance = 0
 
-     for nombre in shapes:
+      for nombre in shapes:
         total_chance += shapes[nombre]['chance']
 
      # -------------------------
      # Generar numero aleatorio
      # -------------------------
-     numero = random.randint(1, total_chance)
+      numero = random.randint(1, total_chance)
 
      # -------------------------
      # Seleccion ponderada
      # -------------------------
-     acumulado = 0
+      acumulado = 0
 
-     for nombre in shapes:
+      for nombre in shapes:
 
         acumulado += shapes[nombre]['chance']
 
@@ -216,19 +234,19 @@ class Juego:
      # -------------------------
      # Obtener estados
      # -------------------------
-     self.pieza_actual = shapes[nombre_pieza]['states']
+      self.pieza_actual = shapes[nombre_pieza]['states']
 
      # -------------------------
      # Posicion inicial
      # -------------------------
-     self.pieza_x = self.ancho / 2 - 2
-     self.pieza_y = 0
-     self.pieza_rotacion = 0
+      self.pieza_x = self.ancho / 2 - 2
+      self.pieza_y = 0
+      self.pieza_rotacion = 0
 
      # -------------------------
      # Verificar colision
      # -------------------------
-     if self.tetris_verificar_colision(
+      if self.tetris_verificar_colision(
         self.pieza_x,
         self.pieza_y,
         self.pieza_rotacion
@@ -236,16 +254,16 @@ class Juego:
         self.juego_terminado = True
 
     def tetris_mover_pieza(self, direccion):
-        if not self.pieza_actual: return
-        dx, dy = 0, 0
-        if direccion == 'LEFT': dx = -1
-        elif direccion == 'RIGHT': dx = 1
-        elif direccion == 'DOWN': dy = 1
-        if not self.tetris_verificar_colision(self.pieza_x + dx, self.pieza_y + dy, self.pieza_rotacion):
-            self.pieza_x += dx
-            self.pieza_y += dy
-        elif dy > 0:
-            self.tetris_fijar_pieza()
+      if not self.pieza_actual: return
+      dx, dy = 0, 0
+      if direccion == 'LEFT': dx = -1
+      elif direccion == 'RIGHT': dx = 1
+      elif direccion == 'DOWN': dy = 1
+      if not self.tetris_verificar_colision(self.pieza_x + dx, self.pieza_y + dy, self.pieza_rotacion):
+        self.pieza_x += dx
+        self.pieza_y += dy
+      elif dy > 0:
+        self.tetris_fijar_pieza()
 
     def tetris_rotar_pieza(self):
         if not self.pieza_actual: return
@@ -261,8 +279,11 @@ class Juego:
                     if 0 <= self.pieza_y + y_offset < self.alto and 0 <= self.pieza_x + x_offset < self.ancho:
                         self.grid[self.pieza_y + y_offset][self.pieza_x + x_offset] = 1
         self.pieza_actual = None
-        self.tetris_limpiar_lineas()
-        self.ejecutar_evento('ON_START')
+        lineas = self.tetris_limpiar_lineas()
+        if lineas and lineas >= 3:
+          self.ejecutar_evento('ON_COMBO')
+        else:
+          self.ejecutar_evento('ON_START')
 
     def tetris_verificar_colision(self, x, y, rotacion):
         if not self.pieza_actual: return False
@@ -280,7 +301,10 @@ class Juego:
         lineas_limpias = self.alto - len(nuevo_grid)
         if lineas_limpias > 0:
             self.grid = [[0] * self.ancho for _ in range(lineas_limpias)] + nuevo_grid
-            for _ in range(lineas_limpias): self.ejecutar_evento('ON_LINE_CLEAR')
+            for _ in range(lineas_limpias):
+              self.ejecutar_evento('ON_LINE_CLEAR')
+            if lineas_limpias >= 3:
+              return lineas_limpias
     
     def snake_spawn_jugador(self, accion):
         coords = accion['params'][0] if accion['params'] else [self.ancho / 2, self.alto / 2]

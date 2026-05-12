@@ -21,6 +21,7 @@ class Juego:
         self.alto = config.get('grid_size', [10, 20])[1]
         self.grid = [[0 for _ in range(self.ancho)] for _ in range(self.alto)]
         self.puntuacion = 0
+        self.color=''
         self.juego_terminado = False
         
         # --- Configuracion de la GUI ---
@@ -87,7 +88,7 @@ class Juego:
 
         # Programa el siguiente ciclo de juego
         self.timer_id = self.root.after(50, self.game_loop)
-        
+
     def cerrar_ventana(self):
         # Detiene el loop de juego de forma segura
         if self.timer_id:
@@ -118,14 +119,14 @@ class Juego:
     def dibujar(self):
         self.canvas.delete("all") # Borrar todo en cada frame
         self.label_score.config(text="PUNTUACION\n" + str(self.puntuacion))
-        
+
         # Colores
         COLOR_GRID_FIJA = '#343434' # Gris oscuro para las celdas fijadas (Tetris)
-        COLOR_PIEZA = '#00FFFF'     # Cyan para la pieza activa (Tetris)
+        COLOR_PIEZA = self.color     # Cyan para la pieza activa (Tetris)
         COLOR_SNAKE_CABEZA = '#00FF00' # Verde brillante
         COLOR_SNAKE_CUERPO = '#33CC33' # Verde normal
         COLOR_FOOD = '#FF0000'      # Rojo
-        
+
         # 1. Dibujar la cuadricula estatica (grid base)
         for y in range(self.alto):
             for x in range(self.ancho):
@@ -139,7 +140,7 @@ class Juego:
                 for x_offset, celda in enumerate(fila):
                     if celda == 1:
                         self.dibujar_celda(self.pieza_x + x_offset, self.pieza_y + y_offset, COLOR_PIEZA)
-        
+
         # 3. Dibujar Snake y Comida
         if self.tipo_juego == 'SNAKE':
             # Comida
@@ -162,46 +163,42 @@ class Juego:
     def ejecutar_evento(self, nombre_evento):
         if nombre_evento in self.datos_juego['events']:
             for accion in self.datos_juego['events'][nombre_evento]:
-                verbo, objeto = accion.get('accion'), accion.get('objeto')
-                
+                verbo, objeto = accion.get('accion'), accion.get('objeto') 
                 if verbo == 'INCREASE_SCORE': self.puntuacion += int(objeto)
                 if verbo == 'GAME_OVER': self.juego_terminado = True
 
                 if self.tipo_juego == 'TETRIS':
-                    if verbo == 'SPAWN' : 
+                    if verbo == 'SPAWN':
                       if objeto == "POWER_UP" : self.tetris_spawn_pieza("POWER_UP")
                       else: self.tetris_spawn_pieza()
                     if verbo == 'MOVE': self.tetris_mover_pieza(accion['params'][0])
                     if verbo == 'ROTATE': self.tetris_rotar_pieza()
-                
                 if self.tipo_juego == 'SNAKE':
                     if verbo == 'SPAWN' and objeto == 'PLAYER': self.snake_spawn_jugador(accion)
                     if verbo == 'SPAWN' and objeto == 'FOOD': self.snake_spawn_comida()
                     if verbo == 'MOVE' and objeto == 'PLAYER': self.snake_mover_jugador()
                     if verbo == 'GROW': self.snake_crecer()
 
-
     # METODOS DE LOGICA DE JUEGO (MANTENIDOS DEL ARCHIVO ORIGINAL)
     # ---------------------------------------------------------------------
 
     def tetris_spawn_pieza(self, tipo_spawn = "NORMAL"):
-      
+
       shapes = self.datos_juego['shapes']
-      
+
       filtradas = {}
-      
+
       if tipo_spawn == "POWER_UP":
-      
+
         for k, v in shapes.items():
           if k == "POWER_UP_PIECE":
             filtradas[k] = v
-      
       else:
-      
+
         for k, v in shapes.items():
           if k != "POWER_UP_PIECE":
             filtradas[k] = v
-      
+
       shapes = filtradas
 
      # -------------------------

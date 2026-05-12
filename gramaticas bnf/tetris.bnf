@@ -10,10 +10,8 @@
 <contenido_shape> ::=
 <elemento_shape>
 | <elemento_shape> <contenido_shape>
-<elemento_shape> ::=
-<estado>
-|
-<chance>
+<elemento_shape> ::= <estado> | <chance> | <color>
+
 <chance> ::= "CHANCE" <numero>
 <estados>          ::= <estado> | <estado> <estados>
 <estado>           ::= "STATE" <numero> ":" <matriz>
@@ -37,3 +35,4 @@
 <numero>        ::= <digito> | <digito> <numero>
 <letra>         ::= "A"..."Z" | "_"
 <digito>        ::= "0"..."9"
+<color>         ::= "Hexadecimal"

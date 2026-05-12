@@ -7,8 +7,8 @@ import re
 import json
 
 def lexer(codigo_fuente):
-    codigo_fuente = re.sub(r'#.*', '', codigo_fuente)
-    token_regex = r'\b[A-Z_]+\b|\d+|[\[\](),:]'
+    codigo_fuente = re.sub(r'#(?![0-9A-Fa-f]{6}\b).*', '', codigo_fuente)
+    token_regex =r'#[0-9A-Fa-f]{6}|\b[A-Z_][A-Z0-9_]*\b|\d+|[\[\](),:]'
     tokens = re.findall(token_regex, codigo_fuente)
     return tokens
 

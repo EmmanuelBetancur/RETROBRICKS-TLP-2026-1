@@ -21,6 +21,7 @@ class Juego:
         self.alto = config.get('grid_size', [10, 20])[1]
         self.grid = [[0 for _ in range(self.ancho)] for _ in range(self.alto)]
         self.puntuacion = 0
+        self.color=''
         self.juego_terminado = False
         
         # --- Configuracion de la GUI ---
@@ -121,7 +122,7 @@ class Juego:
         
         # Colores
         COLOR_GRID_FIJA = '#343434' # Gris oscuro para las celdas fijadas (Tetris)
-        COLOR_PIEZA = '#00FFFF'     # Cyan para la pieza activa (Tetris)
+        COLOR_PIEZA = self.color     # Cyan para la pieza activa (Tetris)
         COLOR_SNAKE_CABEZA = '#00FF00' # Verde brillante
         COLOR_SNAKE_CUERPO = '#33CC33' # Verde normal
         COLOR_FOOD = '#FF0000'      # Rojo
@@ -168,7 +169,9 @@ class Juego:
                 if verbo == 'GAME_OVER': self.juego_terminado = True
 
                 if self.tipo_juego == 'TETRIS':
-                    if verbo == 'SPAWN': self.tetris_spawn_pieza()
+                    if verbo == 'SPAWN':
+                         self.color=str(objeto)
+                         self.tetris_spawn_pieza()
                     if verbo == 'MOVE': self.tetris_mover_pieza(accion['params'][0])
                     if verbo == 'ROTATE': self.tetris_rotar_pieza()
                 

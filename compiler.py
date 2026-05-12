@@ -69,7 +69,8 @@ class Parser:
 
    
      chance = 1
-
+     
+     color = "#00FFFF"
    
      while self.posicion < len(self.tokens) and self.tokens[self.posicion] != 'END':
 
@@ -80,7 +81,12 @@ class Parser:
 
             chance = int(self.consumir())
 
-        
+        elif self.tokens[self.posicion] == 'COLOR':
+
+            self.consumir('COLOR')
+
+            color = self.consumir()
+
         elif self.tokens[self.posicion] == 'STATE':
 
             self.consumir('STATE')
@@ -118,10 +124,11 @@ class Parser:
             )
 
      self.consumir('END')
-
+     
      self.ast['shapes'][nombre_shape] = {
         'states': estados,
-        'chance': chance
+        'chance': chance,
+        'color': color
     }
 
     # --- FUNCION CORREGIDA ---

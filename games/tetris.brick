@@ -5,31 +5,33 @@ GAME_GRID (10, 20)
 
 # --- Definicion de las Piezas ---
 DEFINE SHAPE I_PIECE:
-CHANCE 0
-  STATE 1:
+    CHANCE 50
+    COLOR #00FFFF
+    STATE 1:
     [0, 1, 0, 0]
     [0, 1, 0, 0]
     [0, 1, 0, 0]
     [0, 1, 0, 0]
-  STATE 2:
+    STATE 2:
     [0, 0, 0, 0]
     [1, 1, 1, 1]
     [0, 0, 0, 0]
     [0, 0, 0, 0]
-  STATE 3:
-  [0, 0, 1, 0]
-  [0, 0, 1, 0]
-  [0, 0, 1, 0]
-  [0, 0, 1, 0]
-  STATE 4:
-  [0, 0, 0, 0]
-  [0, 0, 0, 0]
-  [1, 1, 1, 1]
-  [0, 0, 0, 0]
+    STATE 3:
+    [0, 0, 1, 0]
+    [0, 0, 1, 0]
+    [0, 0, 1, 0]
+    [0, 0, 1, 0]
+    STATE 4:
+    [0, 0, 0, 0]
+    [0, 0, 0, 0]
+    [1, 1, 1, 1]
+    [0, 0, 0, 0]
 END
 
 DEFINE SHAPE L_PIECE:
-  CHANCE 0
+  CHANCE 50
+  COLOR #FF8800
   STATE 1:
     [0, 1, 0]
     [0, 1, 0]
@@ -50,6 +52,7 @@ END
 
 DEFINE SHAPE T_PIECE:
   CHANCE 50
+  COLOR #AA00FF
   STATE 1:
     [0, 1, 0]
     [1, 1, 1]
@@ -69,7 +72,8 @@ DEFINE SHAPE T_PIECE:
 END
 
 DEFINE SHAPE C_PIECE:
-  CHANCE 0
+  CHANCE 50
+  COLOR #00CC66
   STATE 1:
     [0, 1, 1]
     [0, 1, 0]
@@ -90,6 +94,7 @@ END
 
 DEFINE SHAPE Z_PIECE:
   CHANCE 50
+  COLOR #FF0033
   STATE 1:
     [1, 1, 1, 0]
     [0, 0, 1, 0]
@@ -112,9 +117,9 @@ DEFINE SHAPE Z_PIECE:
     [0, 0, 0, 0]
 END
 
-
 DEFINE SHAPE V_PIECE:
   CHANCE 0
+  COLOR #FFFF00
   STATE 1:
    [1, 0, 1]
    [0, 1, 0]
@@ -132,14 +137,15 @@ DEFINE SHAPE V_PIECE:
 END
 
 DEFINE SHAPE POWER_UP_PIECE:
+  COLOR #FFFFFF
+  CHANCE 0
   STATE 1:
     [1]
 END
 
 # --- Logica y Reglas ---
-# Compatibilizar esto
 ON START:
-  SPAWN #4d0c83
+  SPAWN RANDOM_SHAPE
 END
 
 ON COMBO:

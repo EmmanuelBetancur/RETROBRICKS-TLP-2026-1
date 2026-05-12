@@ -1,12 +1,16 @@
 {
   "shapes": {
-    "PIXEL": [
-      [
+    "PIXEL": {
+      "states": [
         [
-          1
+          [
+            1
+          ]
         ]
-      ]
-    ]
+      ], 
+      "color": "#FFFFFF", 
+      "chance": 1
+    }
   }, 
   "tipo_juego": "SNAKE", 
   "config": {

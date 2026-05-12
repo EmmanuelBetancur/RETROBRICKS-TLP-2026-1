@@ -5,19 +5,16 @@
 <definiciones> ::= <definicion_shape> | <definicion_shape> <definiciones>
 <eventos>    ::= <evento> | <evento> <eventos>
 
-<definicion_shape> ::=
-"DEFINE" "SHAPE" <identificador> ":" <contenido_shape> "END"
-<contenido_shape> ::=
-<elemento_shape>
-| <elemento_shape> <contenido_shape>
-<elemento_shape> ::= <estado> | <chance> | <color>
+<definicion_shape>  ::= "DEFINE" "SHAPE" <identificador> ":" <contenido_shape> "END"
+<contenido_shape>   ::= <elemento_shape> | <elemento_shape> <contenido_shape>
+<elemento_shape>    ::= <estado> | <chance> | <color>
 
-<chance> ::= "CHANCE" <numero>
-<estados>          ::= <estado> | <estado> <estados>
-<estado>           ::= "STATE" <numero> ":" <matriz>
-<matriz>           ::= <fila> | <fila> <matriz>
-<fila>             ::= "[" <valores_fila> "]"
-<valores_fila>     ::= <numero> | <numero> "," <valores_fila>
+<chance>            ::= "CHANCE" <numero>
+<estados>           ::= <estado> | <estado> <estados>
+<estado>            ::= "STATE" <numero> ":" <matriz>
+<matriz>            ::= <fila> | <fila> <matriz>
+<fila>              ::= "[" <valores_fila> "]"
+<valores_fila>      ::= <numero> | <numero> "," <valores_fila>
 
 <evento>           ::= "ON" <nombre_evento_tetris> ":" <acciones_tetris> "END"
 <nombre_evento_tetris> ::= "START" | "TICK" | "LINE_CLEAR" | "COMBO" | "KEY_UP" | "KEY_DOWN" | "KEY_LEFT" | "KEY_RIGHT"

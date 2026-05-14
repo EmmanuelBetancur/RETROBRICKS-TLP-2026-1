@@ -122,7 +122,8 @@ class Juego:
 
         # Colores
         COLOR_GRID_FIJA = '#343434' # Gris oscuro para las celdas fijadas (Tetris)
-        COLOR_PIEZA = self.color_actual
+        if self.tipo_juego == 'TETRIS' and self.pieza_actual:
+            COLOR_PIEZA = self.color_actual
         COLOR_SNAKE_CABEZA = '#00FF00' # Verde brillante
         COLOR_SNAKE_CUERPO = '#33CC33' # Verde normal
         COLOR_FOOD = '#FF0000'      # Rojo

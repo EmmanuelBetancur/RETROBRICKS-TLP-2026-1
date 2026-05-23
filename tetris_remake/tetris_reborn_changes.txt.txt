@@ -1,0 +1,22 @@
+Documento de cambios:
+Actividad 3:
+Modificaciones al compilador:
+.Se corrigió la eliminación errónea de números hexadecimales del compiler.exe y se incluyó en los tokens admitidos para poder modificar el color de las figuras de tetris desde el archivo tetris.brick. (Santiago Agudelo)
+.Se actualizó el parser  para que reconozca tanto el chance como los estados normales. (Gihad Fares)
+
+Modificación al runtime:
+.Se definió una variable para la función __Init__ como parte de los datos del juego para guardar el color seleccionado y cargarlo para cuando se genere una ficha. (Santiago Agudelo)
+.Se modificó la lógica del método tetris_spawn_pieza() para que evalue si se esta llamando a un evento COMBO y responder haciendo SPAWN de una pieza POWER UP, o hacer SPAWN de una pieza normal. (Gihad Fares)
+.Se modificó la logica del metodo self.tetris_limpiar_lineas() para que, en caso de eliminar 3 o mas lineas al mismo tiempo, se bonifique al jugador con una pieza POWER UP de 1x1 para rellenar huecos. (Emmanuel Betancur)
+.Ahora las piezas no tienen las mismas probabilidades de aparecer, con el chance desde el archivo brick se les da la probabilidad de spawn. (Gihad Fares)
+
+Modificaciones a tetris.brick:
+.Se definieron 3 nuevas figuras la “C”, “V” y la “Z” y se incluyeron sus cuatro estados de rotación. (Santiago Agudelo)
+.Se completaron los estados de rotación de todas las figuras ya creadas previamente. (Santiago Agudelo)
+.Se agregaron variables de COLOR a cada SHAPE para darle un color unico a cada pieza. (Santiago Agudelo)
+.Se agrego el evento ON COMBO para llamar al SPAWN del POWER UP. (Emmanuel Betancur)
+
+Modificaciones a tetris.bnf:
+.Se definió una nueva sintaxis para SPAWN permitiendo ahora llamar piezas normales y un power up. (Emmanuel Betancur)
+.Se agregaron tokens <entidad> para poder diferenciar entre piezas normales y power ups. (Emmanuel Betancur)
+.Se modificó la gramática para agregar el atributo chance, color de tal manera que no perdiera la retrocompatibilidad ahora un shape puede contener tanto como estados como atributos adicionales como el chance y el color. (Gihad Fares)

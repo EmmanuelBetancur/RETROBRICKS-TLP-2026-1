@@ -32,6 +32,5 @@
 <numero>        ::= <digito> | <digito> <numero>
 <letra>         ::= "A"..."Z" | "_"
 <digito>        ::= "0"..."9"
-<<<<<<< HEAD
 <color>         ::= "Hexadecimal"
 

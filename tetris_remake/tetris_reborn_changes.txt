@@ -8,7 +8,8 @@ Modificación al runtime:
 .Se definió una variable para la función __Init__ como parte de los datos del juego para guardar el color seleccionado y cargarlo para cuando se genere una ficha. (Santiago Agudelo)
 .Se modificó la lógica del método tetris_spawn_pieza() para que evalue si se esta llamando a un evento COMBO y responder haciendo SPAWN de una pieza POWER UP, o hacer SPAWN de una pieza normal. (Gihad Fares)
 .Se modificó la logica del metodo self.tetris_limpiar_lineas() para que, en caso de eliminar 3 o mas lineas al mismo tiempo, se bonifique al jugador con una pieza POWER UP de 1x1 para rellenar huecos. (Emmanuel Betancur)
-.Ahora las piezas no tienen las mismas probabilidades de aparecer, con el chance desde el archivo brick se les da la probabilidad de spawn. (Gihad Fares)
+Se agrego la logica en el metodo de SPAWN para que lea individualmente un color definido individualmente para cada pieza en el archivo tetris.brick. (Emmanuel Betancur)
+.Ahora las piezas no tienen las mismas probabilidades de aparecer, con el chance desde el archivo brick se les da la probabilidad de spawn. (Gihad Fares)  
 
 Modificaciones a tetris.brick:
 .Se definieron 3 nuevas figuras la “C”, “V” y la “Z” y se incluyeron sus cuatro estados de rotación. (Santiago Agudelo)

@@ -11,7 +11,7 @@ Modificación al runtime:
 Se agrego la logica en el metodo de SPAWN para que lea individualmente un color definido individualmente para cada pieza en el archivo tetris.brick. (Emmanuel Betancur)
 .Ahora las piezas no tienen las mismas probabilidades de aparecer, con el chance desde el archivo brick se les da la probabilidad de spawn. (Gihad Fares)  
 
-Modificaciones a tetris.brick:mm
+Modificaciones a tetris.brick:
 .Se definieron 3 nuevas figuras la “C”, “V” y la “Z” y se incluyeron sus cuatro estados de rotación. (Santiago Agudelo)
 .Se completaron los estados de rotación de todas las figuras ya creadas previamente. (Santiago Agudelo)
 .Se agregaron variables de COLOR a cada SHAPE para darle un color unico a cada pieza. (Santiago Agudelo)

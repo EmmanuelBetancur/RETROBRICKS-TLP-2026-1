@@ -201,33 +201,36 @@ class Juego:
             filtradas[k] = v
 
       shapes = filtradas
+      if tipo_spawn == "NORMAL":
 
-     # -------------------------
-     # Calcular suma total
-     # de probabilidades
-     # -------------------------
-      total_chance = 0
+        # -------------------------
+        # Calcular suma total
+        # de probabilidades
+        # -------------------------
+        total_chance = 0
 
-      for nombre in shapes:
-        total_chance += shapes[nombre]['chance']
+        for nombre in shapes:
+            total_chance += shapes[nombre]['chance']
 
-     # -------------------------
-     # Generar numero aleatorio
-     # -------------------------
-      numero = random.randint(1, total_chance)
+        # -------------------------
+        # Generar numero aleatorio
+        # -------------------------
+        numero = random.randint(1, total_chance)
 
-     # -------------------------
-     # Seleccion ponderada
-     # -------------------------
-      acumulado = 0
+        # -------------------------
+        # Seleccion ponderada
+        # -------------------------
+        acumulado = 0
 
-      for nombre in shapes:
+        for nombre in shapes:
 
-        acumulado += shapes[nombre]['chance']
+            acumulado += shapes[nombre]['chance']
 
-        if numero <= acumulado:
-            nombre_pieza = nombre
-            break
+            if numero <= acumulado:
+                nombre_pieza = nombre
+                break
+      elif tipo_spawn == "POWER_UP":
+          nombre_pieza = "POWER_UP_PIECE"
 
      # -------------------------
      # Obtener estados

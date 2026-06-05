@@ -82,6 +82,26 @@
       {
         "params": [
           [
+            4, 
+            4
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "CLOUD"
+      }, 
+      {
+        "params": [
+          [
+            8, 
+            8
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "CLOUD"
+      }, 
+      {
+        "params": [
+          [
             9, 
             9
           ]

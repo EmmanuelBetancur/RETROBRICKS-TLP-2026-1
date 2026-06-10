@@ -24,6 +24,7 @@ class Juego:
         self.color_act='#FF0000'
         self.juego_terminado = False
         
+        
         # --- Configuracion de la GUI ---
         self.root = tk.Tk()
         self.root.title("BrickScript - " + self.tipo_juego)
@@ -61,17 +62,23 @@ class Juego:
             self.serpiente_cuerpo = []
             self.serpiente_direccion = (1, 0)
             self.posicion_comida = None
-            self.nubes = []
-            self.nyan_colors = [
-             '#FF0000',
-             '#FF7F00',
-             '#FFFF00',
-             '#00FF00',
-              '#0000FF',
-              '#4B0082',
-              '#9400D3'
+            self.level=self.datos_juego['shapes'][next(iter(self.datos_juego['shapes']))]['level'] #Nueva variable para definir el nivel
+            self.body=self.datos_juego['shapes'][next(iter(self.datos_juego['shapes']))]['body'] #Nueva variable para definir el cuerpo
+            if self.level=="NYAN_CAT": #activar nubes y cola colorida solo en nivel Nyan_cat 
+             self.nubes = []
+             self.nyan_colors = [
+                 '#FF0000',
+                 '#FF7F00',
+                 '#FFFF00',
+                 '#00FF00',
+                 '#0000FF',
+                 '#4B0082',
+                 '#9400D3'
                         ]
-            self.velocidad_gravedad = 0.15
+             
+             self.velocidad_gravedad = 0.1 if self.level=="NYAN_CAT" else 0.15 #Velocidad del Snake
+            
+            
             
         
         self.timer_gravedad = 0
@@ -138,6 +145,7 @@ class Juego:
         COLOR_SNAKE_CABEZA = '#00FF00' # Verde brillante
         COLOR_SNAKE_CUERPO = '#33CC33' # Verde normal
         COLOR_FOOD = '#FF0000'      # Rojo
+       
 
         # 1. Dibujar la cuadricula estatica (grid base)
         for y in range(self.alto):
@@ -156,30 +164,31 @@ class Juego:
 
         # 3. Dibujar Snake y Comida
         if self.tipo_juego == 'SNAKE':
-            for x, y in self.nubes:
+            if self.level=="NYAN_CAT":
+             for x, y in self.nubes:
+                 ts = self.taman_celda
 
-             ts = self.taman_celda
+                 px = (x * ts)
+                 py = y * ts
 
-             px = x * ts
-             py = y * ts
+                 self.canvas.create_oval(
+                 px,
+                 py,
+                 px + ts,
+                 py + ts,
+                 fill='white',
+                 outline='gray'
+                 )
 
-             self.canvas.create_oval(
-             px,
-             py,
-             px + ts,
-             py + ts,
-             fill='white',
-             outline='gray'
-    )
-
-             self.canvas.create_oval(
-             px + ts//2,
-             py - ts//4,
-             px + ts + ts//2,
-             py + ts - ts//4,
-             fill='white',
-             outline='gray'
-             )
+                 self.canvas.create_oval(
+                 px + ts//2,
+                 py - ts//4,
+                 px + ts + ts//2,
+                 py + ts - ts//4,
+                 fill='white',
+                 outline='gray'
+                )
+             
             # Comida
             if self.posicion_comida:
                 x, y = self.posicion_comida
@@ -190,7 +199,7 @@ class Juego:
 
                 x, y = segmento
 
-                if i == 0:
+                if i == 0 and self.level=="NYAN_CAT":
 
                     self.dibujar_circulo(
                     x,
@@ -202,21 +211,58 @@ class Juego:
 
                     color = self.nyan_colors[
                     (i - 1) % len(self.nyan_colors)
-                    ]
+                    ]if self.level=="NYAN_CAT" else '#33CC33'
 
-                    self.dibujar_celda(
+                    self.dibujar_cuerpo(
              x,
             y,
             color
         )
 
-                
+
+    #Dibujar la figura que toma el cuerpo
+    def dibujar_cuerpo(self,x,y,color):
+        ts = self.taman_celda # Alias para taman de celda
+        if self.body=="CIRCULO":
+         x1 = (x * ts)-1
+         y1 = (y * ts)-1
+
+         x2 = x1 + ts+1
+         y2 = y1 + ts+1
+
+         self.canvas.create_oval(
+             x1,
+             y1,
+             x2,
+             y2,
+             fill=color,
+             outline='black'
+            )
+        elif self.body=="TRIANGULO":
+            x1,y1= (x*ts), y * ts, # punta superior
+            x2,y2= (x*ts)+ts, y1, # esquina inferior izquierda
+            x3,y3= (x*ts)+ts/2 , y1+ts , # esquina inferior derecha
+            self.canvas.create_polygon(
+             x1, y1,
+             x2, y2,
+             x3, y3,
+             fill=color,
+             outline='black'
+            )   
+        else:
+            x1, y1 = x * ts, y * ts
+            x2, y2 = x1 + ts, y1 + ts
+            self.canvas.create_rectangle(x1, y1, x2, y2, fill=color, outline='#000000')
+
+
+
 
     def dibujar_celda(self, x, y, color):
         ts = self.taman_celda # Alias para taman de celda
         x1, y1 = x * ts, y * ts
         x2, y2 = x1 + ts, y1 + ts
         self.canvas.create_rectangle(x1, y1, x2, y2, fill=color, outline='#000000')
+    #Dibujar cabeza nivel Nyan_Cat
     def dibujar_circulo(self, x, y, color):
 
         ts = self.taman_celda
@@ -270,7 +316,7 @@ class Juego:
                     if verbo == 'SPAWN' and objeto == 'FOOD': self.snake_spawn_comida()
                     if verbo == 'MOVE' and objeto == 'PLAYER': self.snake_mover_jugador()
                     if verbo == 'GROW': self.snake_crecer()
-                    if verbo == 'SPAWN' and objeto == 'CLOUD':
+                    if verbo == 'SPAWN' and objeto == 'CLOUD'and self.level=="NYAN_CAT":
                         x, y = accion['params'][0]
                         self.nubes.append((x, y))
 
@@ -332,6 +378,7 @@ class Juego:
       self.pieza_actual = shapes[nombre_pieza]['states']
       
       #Obtener Color
+      
       self.color_actual = shapes[nombre_pieza]['color']
      # -------------------------
      # Posicion inicial
@@ -420,19 +467,32 @@ class Juego:
         cabeza_x, cabeza_y = self.serpiente_cuerpo[0]
         dir_x, dir_y = self.serpiente_direccion
         nueva_cabeza = (cabeza_x + dir_x, cabeza_y + dir_y)
-        if nueva_cabeza in self.nubes:
+        #Acabar si se choca con una nube + condicion de nivel
+        if (self.level=="NYAN_CAT")and(nueva_cabeza in self.nubes):
             if self.puntuacion >0:
                 self.puntuacion=0
+                self.ejecutar_evento('ON_START')
             else:
                 self.juego_terminado=True
             return
-
+        
+        #Acabar si se choca con una pared + condicion de nivel
         if not (0 <= nueva_cabeza[0] < self.ancho and 0 <= nueva_cabeza[1] < self.alto):
-            self.ejecutar_evento('ON_COLLISION_WALL')
+            if (self.puntuacion >0):
+                self.puntuacion=0
+                self.ejecutar_evento('ON_START')
+             
+            else:
+             self.ejecutar_evento('ON_COLLISION_WALL')
             return
-            
+
+        #Acabar si se choca con el cuerpo + condicion de nivel
         if nueva_cabeza in self.serpiente_cuerpo[:-1]:
-            self.ejecutar_evento('ON_COLLISION_SELF')
+            if (self.level=="NYAN_CAT")and (self.puntuacion >0):
+                self.puntuacion=0
+                self.ejecutar_evento('ON_START')
+            else:
+             self.ejecutar_evento('ON_COLLISION_SELF')
             return
 
         self.serpiente_cuerpo.insert(0, nueva_cabeza)

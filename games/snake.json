@@ -1,6 +1,7 @@
 {
   "shapes": {
     "PIXEL": {
+      "body": "CIRCULO", 
       "states": [
         [
           [
@@ -8,8 +9,9 @@
           ]
         ]
       ], 
+      "chance": 1, 
       "color": "#00FFFF", 
-      "chance": 1
+      "level": "NYAN_CAT"
     }
   }, 
   "tipo_juego": "SNAKE", 

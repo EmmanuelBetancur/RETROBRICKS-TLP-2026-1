@@ -5,6 +5,8 @@ GAME_GRID (18, 18)
 
 # --- Definicion de Elementos ---
 DEFINE SHAPE PIXEL:
+  BODY CIRCULO
+  LEVEL NYAN_CAT
   STATE 1:
     [1]
 END

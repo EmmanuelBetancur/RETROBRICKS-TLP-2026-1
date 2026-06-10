@@ -66,27 +66,39 @@ class Parser:
      self.consumir(':')
 
      estados = []
-
-   
+     body= ""
+     level=""
      chance = 1
      
      color = "#00FFFF"
    
      while self.posicion < len(self.tokens) and self.tokens[self.posicion] != 'END':
 
-       
+       #Nuevos tokens
         if self.tokens[self.posicion] == 'CHANCE':
 
             self.consumir('CHANCE')
 
             chance = int(self.consumir())
+        elif self.tokens[self.posicion] == 'BODY':
+
+            self.consumir('BODY')
+
+            body = self.consumir()    
+
 
         elif self.tokens[self.posicion] == 'COLOR':
 
             self.consumir('COLOR')
 
             color = self.consumir()
+        elif self.tokens[self.posicion] == 'LEVEL':
 
+            self.consumir('LEVEL')
+
+            level = self.consumir()   
+            
+        #Viejos tokens
         elif self.tokens[self.posicion] == 'STATE':
 
             self.consumir('STATE')
@@ -126,6 +138,8 @@ class Parser:
      self.consumir('END')
      
      self.ast['shapes'][nombre_shape] = {
+        'level':level,
+        'body':body,
         'states': estados,
         'chance': chance,
         'color': color

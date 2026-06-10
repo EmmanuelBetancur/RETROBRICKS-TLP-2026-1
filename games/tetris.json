@@ -1,6 +1,7 @@
 {
   "shapes": {
     "C_PIECE": {
+      "body": "", 
       "states": [
         [
           [
@@ -71,10 +72,12 @@
           ]
         ]
       ], 
+      "chance": 50, 
       "color": "#00CC66", 
-      "chance": 50
+      "level": ""
     }, 
     "Z_PIECE": {
+      "body": "", 
       "states": [
         [
           [
@@ -181,10 +184,12 @@
           ]
         ]
       ], 
+      "chance": 30, 
       "color": "#FF0033", 
-      "chance": 30
+      "level": ""
     }, 
     "POWER_UP_PIECE": {
+      "body": "", 
       "states": [
         [
           [
@@ -192,10 +197,12 @@
           ]
         ]
       ], 
+      "chance": 0, 
       "color": "#FFFFFF", 
-      "chance": 0
+      "level": ""
     }, 
     "V_PIECE": {
+      "body": "", 
       "states": [
         [
           [
@@ -250,10 +257,12 @@
           ]
         ]
       ], 
+      "chance": 50, 
       "color": "#FFFF00", 
-      "chance": 50
+      "level": ""
     }, 
     "L_PIECE": {
+      "body": "", 
       "states": [
         [
           [
@@ -324,10 +333,12 @@
           ]
         ]
       ], 
+      "chance": 50, 
       "color": "#FF8800", 
-      "chance": 50
+      "level": ""
     }, 
     "T_PIECE": {
+      "body": "", 
       "states": [
         [
           [
@@ -398,10 +409,12 @@
           ]
         ]
       ], 
+      "chance": 50, 
       "color": "#AA00FF", 
-      "chance": 50
+      "level": ""
     }, 
     "I_PIECE": {
+      "body": "", 
       "states": [
         [
           [
@@ -508,8 +521,9 @@
           ]
         ]
       ], 
+      "chance": 50, 
       "color": "#00FFFF", 
-      "chance": 50
+      "level": ""
     }
   }, 
   "tipo_juego": "TETRIS", 

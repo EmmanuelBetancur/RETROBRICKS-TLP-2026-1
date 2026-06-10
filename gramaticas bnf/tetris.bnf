@@ -7,7 +7,7 @@
 
 <definicion_shape>  ::= "DEFINE" "SHAPE" <identificador> ":" <contenido_shape> "END"
 <contenido_shape>   ::= <elemento_shape> | <elemento_shape> <contenido_shape>
-<elemento_shape>    ::= <estado> | <chance> | <color>
+<elemento_shape>    ::= <estados> | <chance> | <color>
 
 <chance>            ::= "CHANCE" <numero>
 <estados>           ::= <estado> | <estado> <estados>

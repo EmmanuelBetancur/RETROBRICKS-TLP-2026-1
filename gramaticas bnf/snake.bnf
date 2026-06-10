@@ -6,6 +6,11 @@
 <eventos>    ::= <evento> | <evento> <eventos>
 
 <definicion_shape> ::= "DEFINE" "SHAPE" <identificador> ":" <estados> "END"
+<contenido_shape>   ::= <elemento_shape> | <elemento_shape> <contenido_shape>
+<elemento_shape>    ::= <estados> | <body> | <level>
+
+<body>            ::= "BODY" <figura>
+<level>            ::= "LEVEL" <nivel>
 <estados>          ::= <estado> | <estado> <estados>
 <estado>           ::= "STATE" <numero> ":" <matriz>
 <matriz>           ::= <fila> | <fila> <matriz>
@@ -25,6 +30,8 @@
 <accion_crecer>        ::= "GROW" "PLAYER" <numero>
 <accion_gameover>      ::= "GAME_OVER"
 
+<figura>     ::= "CUADRADO" | "CIRCULO" | "TRIANGULO"
+<nivel>     ::= "BABY" | "ENTUSIASTA" | "NYAN_CAT"
 <coordenadas>   ::= "(" <numero> "," <numero> ")"
 <direccion>     ::= "UP" | "DOWN" | "LEFT" | "RIGHT"
 <identificador> ::= <letra> | <letra> <identificador>

@@ -2,6 +2,8 @@
   "shapes": {
     "PIXEL": {
       "body": "CIRCULO", 
+      "level": "ENTUSIASTA", 
+      "color": "#00FFFF", 
       "states": [
         [
           [
@@ -10,8 +12,7 @@
         ]
       ], 
       "chance": 1, 
-      "color": "#00FFFF", 
-      "level": "NYAN_CAT"
+      "power_up": 10
     }
   }, 
   "tipo_juego": "SNAKE", 
@@ -27,6 +28,20 @@
         "params": [], 
         "accion": "SET_DIRECTION", 
         "objeto": "DOWN"
+      }
+    ], 
+    "ON_EAT_FRUIT": [
+      {
+        "params": [], 
+        "accion": "DECREASE_SCORE", 
+        "objeto": "10"
+      }, 
+      {
+        "params": [
+          "RANDOM"
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "FRUIT"
       }
     ], 
     "ON_EAT_FOOD": [
@@ -117,6 +132,27 @@
         ], 
         "accion": "SPAWN", 
         "objeto": "FOOD"
+      }, 
+      {
+        "params": [
+          "RANDOM"
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "FRUIT"
+      }
+    ], 
+    "ON_POISON": [
+      {
+        "params": [], 
+        "accion": "GAME_OVER", 
+        "objeto": null
+      }
+    ], 
+    "ON_POWER_UP": [
+      {
+        "params": [], 
+        "accion": "SPAWN", 
+        "objeto": "POWER_UP"
       }
     ], 
     "ON_KEY_UP": [
@@ -131,6 +167,32 @@
         "params": [], 
         "accion": "SET_DIRECTION", 
         "objeto": "LEFT"
+      }
+    ], 
+    "ON_RESET": [
+      {
+        "params": [
+          [
+            9, 
+            9
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "PLAYER"
+      }, 
+      {
+        "params": [
+          "RANDOM"
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "FOOD"
+      }, 
+      {
+        "params": [
+          "RANDOM"
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "FRUIT"
       }
     ]
   }

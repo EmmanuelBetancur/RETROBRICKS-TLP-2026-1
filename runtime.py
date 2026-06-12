@@ -3,7 +3,7 @@
 
 import sys
 import json
-import time
+import threading
 import random
 # Tkinter es la libreria GUI estandar de Python, compatible con 2.7
 import Tkinter as tk
@@ -20,7 +20,7 @@ class Juego:
         self.ancho = config.get('grid_size', [10, 20])[0]
         self.alto = config.get('grid_size', [10, 20])[1]
         self.grid = [[0 for _ in range(self.ancho)] for _ in range(self.alto)]
-        self.puntuacion = 0
+        self.puntuacion = 0 
         self.color_act='#FF0000'
         self.juego_terminado = False
         
@@ -62,10 +62,20 @@ class Juego:
             self.serpiente_cuerpo = []
             self.serpiente_direccion = (1, 0)
             self.posicion_comida = None
+            self.velocidad_gravedad = 0.15
+            self.inmortal = False
+            self.cabeza = '#00FF00'
+            self.cuerpo = '#33CC33'
             self.level=self.datos_juego['shapes'][next(iter(self.datos_juego['shapes']))]['level'] #Nueva variable para definir el nivel
             self.body=self.datos_juego['shapes'][next(iter(self.datos_juego['shapes']))]['body'] #Nueva variable para definir el cuerpo
+            if self.level=="ENTUSIASTA": #activar frutas venenosas y power ups
+                self.pos_fruta = None
+                self.powertime=self.datos_juego['shapes'][next(iter(self.datos_juego['shapes']))]['power_up']
+                self.powercool= False
+                self.pos_power = None
             if self.level=="NYAN_CAT": #activar nubes y cola colorida solo en nivel Nyan_cat 
              self.nubes = []
+             self.velocidad_gravedad = 0.1 
              self.nyan_colors = [
                  '#FF0000',
                  '#FF7F00',
@@ -75,12 +85,6 @@ class Juego:
                  '#4B0082',
                  '#9400D3'
                         ]
-             
-             self.velocidad_gravedad = 0.1 if self.level=="NYAN_CAT" else 0.15 #Velocidad del Snake
-            
-            
-            
-        
         self.timer_gravedad = 0
         self.ejecutar_evento('ON_START')
         self.timer_id = None # Para controlar el loop de Tkinter
@@ -142,9 +146,11 @@ class Juego:
         COLOR_GRID_FIJA = '#343434' # Gris oscuro para las celdas fijadas (Tetris)
         if self.tipo_juego == 'TETRIS' and self.pieza_actual:
             COLOR_PIEZA = self.color_actual
-        COLOR_SNAKE_CABEZA = '#00FF00' # Verde brillante
-        COLOR_SNAKE_CUERPO = '#33CC33' # Verde normal
+        COLOR_SNAKE_CABEZA = self.cabeza # Verde brillante
+        COLOR_SNAKE_CUERPO = self.cuerpo # Verde normal
         COLOR_FOOD = '#FF0000'      # Rojo
+        COLOR_FRUIT = "#ECFC09"     # Amarillo
+        COLOR_POWER = "#0D09FC"     # Azul
        
 
         # 1. Dibujar la cuadricula estatica (grid base)
@@ -193,31 +199,30 @@ class Juego:
             if self.posicion_comida:
                 x, y = self.posicion_comida
                 self.dibujar_celda(x, y, COLOR_FOOD)
+
+            if self.level=="ENTUSIASTA":
+                if self.pos_fruta:
+                    x, y = self.pos_fruta
+                    self.dibujar_celda(x, y, COLOR_FRUIT)
+                if self.pos_power:
+                    x, y = self.pos_power
+                    self.dibujar_celda(x, y, COLOR_POWER)
                 
             # Cuerpo de la Serpiente
             for i, segmento in enumerate(self.serpiente_cuerpo):
 
                 x, y = segmento
 
-                if i == 0 and self.level=="NYAN_CAT":
-
-                    self.dibujar_circulo(
-                    x,
-                    y,
-                    COLOR_SNAKE_CABEZA
-                        )
-
+                if i == 0:
+                    if self.level == "NYAN_CAT":
+                        self.dibujar_circulo(x, y, COLOR_SNAKE_CABEZA)
+                    else:
+                        self.dibujar_cuerpo(x, y, COLOR_SNAKE_CABEZA)
                 else:
+                    color = self.nyan_colors[(i - 1) % len(self.nyan_colors)] \
+                        if self.level=="NYAN_CAT" else COLOR_SNAKE_CUERPO
 
-                    color = self.nyan_colors[
-                    (i - 1) % len(self.nyan_colors)
-                    ]if self.level=="NYAN_CAT" else '#33CC33'
-
-                    self.dibujar_cuerpo(
-             x,
-            y,
-            color
-        )
+                    self.dibujar_cuerpo(x, y, color)
 
 
     #Dibujar la figura que toma el cuerpo
@@ -303,6 +308,7 @@ class Juego:
             for accion in self.datos_juego['events'][nombre_evento]:
                 verbo, objeto = accion.get('accion'), accion.get('objeto') 
                 if verbo == 'INCREASE_SCORE': self.puntuacion += int(objeto)
+                if verbo == 'DECREASE_SCORE': self.puntuacion -= int(objeto)
                 if verbo == 'GAME_OVER': self.juego_terminado = True
 
                 if self.tipo_juego == 'TETRIS':
@@ -314,6 +320,8 @@ class Juego:
                 if self.tipo_juego == 'SNAKE':
                     if verbo == 'SPAWN' and objeto == 'PLAYER': self.snake_spawn_jugador(accion)
                     if verbo == 'SPAWN' and objeto == 'FOOD': self.snake_spawn_comida()
+                    if verbo == 'SPAWN' and objeto == 'FRUIT': self.snake_spawn_fruta()
+                    if verbo == 'SPAWN' and objeto == 'POWER_UP': self.snake_spawn_power()
                     if verbo == 'MOVE' and objeto == 'PLAYER': self.snake_mover_jugador()
                     if verbo == 'GROW': self.snake_crecer()
                     if verbo == 'SPAWN' and objeto == 'CLOUD'and self.level=="NYAN_CAT":
@@ -457,11 +465,28 @@ class Juego:
         
     def snake_spawn_comida(self):
         while True:
+            if self.level=="ENTUSIASTA":
+                powergen = random.random() < 0.3
+                if powergen and not self.powercool: self.ejecutar_evento('ON_POWER_UP') 
             x, y = random.randint(0, self.ancho - 1), random.randint(0, self.alto - 1)
             if (x, y) not in self.serpiente_cuerpo:
                 self.posicion_comida = (x, y)
                 break
                 
+    def snake_spawn_fruta(self):
+        while True:
+            x, y = random.randint(0, self.ancho - 1), random.randint(0, self.alto - 1)
+            if (x, y) not in self.serpiente_cuerpo:
+                self.pos_fruta = (x, y)
+                break
+
+    def snake_spawn_power(self):
+        while True:
+            x, y = random.randint(0, self.ancho - 1), random.randint(0, self.alto - 1)
+            if (x, y) not in self.serpiente_cuerpo:
+                self.pos_power = (x, y)
+                break
+
     def snake_mover_jugador(self):
         if not self.serpiente_cuerpo: return
         cabeza_x, cabeza_y = self.serpiente_cuerpo[0]
@@ -479,21 +504,44 @@ class Juego:
         #Acabar si se choca con una pared + condicion de nivel
         if not (0 <= nueva_cabeza[0] < self.ancho and 0 <= nueva_cabeza[1] < self.alto):
             if (self.puntuacion >0):
-                self.puntuacion=0
-                self.ejecutar_evento('ON_START')
-             
+                if self.inmortal: self.ejecutar_evento('ON_RESET')  
+                else:
+                    self.puntuacion=0
+                    self.ejecutar_evento('ON_START')           
             else:
-             self.ejecutar_evento('ON_COLLISION_WALL')
+                if self.inmortal:
+                    self.ejecutar_evento('ON_RESET')     
+                else: self.ejecutar_evento('ON_COLLISION_WALL')
             return
 
         #Acabar si se choca con el cuerpo + condicion de nivel
         if nueva_cabeza in self.serpiente_cuerpo[:-1]:
-            if (self.level=="NYAN_CAT")and (self.puntuacion >0):
-                self.puntuacion=0
-                self.ejecutar_evento('ON_START')
+            if (self.puntuacion >0):
+                if self.inmortal: pass  
+                else:
+                    self.puntuacion=0
+                    self.ejecutar_evento('ON_START')
             else:
-             self.ejecutar_evento('ON_COLLISION_SELF')
+                if self.inmortal: pass
+                else: self.ejecutar_evento('ON_COLLISION_SELF')
             return
+        
+        #Acabar si se choca con la fruta venenosa + condicion de nivel
+        if (self.level=="ENTUSIASTA")and(nueva_cabeza == self.pos_fruta):
+            if self.puntuacion >= 10:
+                self.ejecutar_evento("ON_EAT_FRUIT")
+            else:
+                if self.inmortal: pass
+                else: self.ejecutar_evento("ON_POISON")
+            return
+        
+        #Activar inmortalidad
+        if (self.level=="ENTUSIASTA")and(nueva_cabeza == self.pos_power):
+            self.temporizador = None
+            self.snake_activar_inmortal()
+            self.pos_power = None
+            self.powercool = True
+            threading.Timer(15, self.snake_fin_cooldown).start()
 
         self.serpiente_cuerpo.insert(0, nueva_cabeza)
         
@@ -501,6 +549,23 @@ class Juego:
             self.ejecutar_evento('ON_EAT_FOOD')
         else:
             self.serpiente_cuerpo.pop()
+
+    def snake_fin_cooldown(self):
+        self.powercool = False
+
+    def snake_activar_inmortal(self):
+        self.inmortal = True
+        if self.temporizador:
+            self.temporizador.cancel()
+        self.temporizador = threading.Timer(self.powertime, self.snake_desactivar_inmortal)
+        self.temporizador.start()
+        self.cabeza = "#0099FF"
+        self.cuerpo = "#12FCF0"
+    
+    def snake_desactivar_inmortal(self):
+        self.inmortal = False
+        self.cabeza = '#00FF00'
+        self.cuerpo = '#33CC33'
 
     def snake_cambiar_direccion(self, direccion):
         if direccion == 'UP' and self.serpiente_direccion[1] != 1:

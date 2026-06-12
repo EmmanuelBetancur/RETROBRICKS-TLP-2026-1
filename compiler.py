@@ -68,6 +68,7 @@ class Parser:
      estados = []
      body= ""
      level=""
+     power_up=""
      chance = 1
      
      color = "#00FFFF"
@@ -97,6 +98,12 @@ class Parser:
             self.consumir('LEVEL')
 
             level = self.consumir()   
+
+        elif self.tokens[self.posicion] == 'POWER_UP':
+
+            self.consumir('POWER_UP')
+
+            power_up = int(self.consumir())       
             
         #Viejos tokens
         elif self.tokens[self.posicion] == 'STATE':
@@ -140,6 +147,7 @@ class Parser:
      self.ast['shapes'][nombre_shape] = {
         'level':level,
         'body':body,
+        'power_up':power_up,
         'states': estados,
         'chance': chance,
         'color': color

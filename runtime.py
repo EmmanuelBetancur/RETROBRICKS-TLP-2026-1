@@ -503,7 +503,7 @@ class Juego:
         
         #Acabar si se choca con una pared + condicion de nivel
         if not (0 <= nueva_cabeza[0] < self.ancho and 0 <= nueva_cabeza[1] < self.alto):
-            if (self.puntuacion >0):
+            if (self.level=="NYAN_CAT")and(self.puntuacion >0):
                 if self.inmortal: self.ejecutar_evento('ON_RESET')  
                 else:
                     self.puntuacion=0
@@ -516,7 +516,7 @@ class Juego:
 
         #Acabar si se choca con el cuerpo + condicion de nivel
         if nueva_cabeza in self.serpiente_cuerpo[:-1]:
-            if (self.puntuacion >0):
+            if (self.level=="NYAN_CAT")and(self.puntuacion >0):
                 if self.inmortal: pass  
                 else:
                     self.puntuacion=0

@@ -131,11 +131,12 @@ class Juego:
             elif key == 'LEFT': self.ejecutar_evento('ON_KEY_LEFT')
             elif key == 'RIGHT': self.ejecutar_evento('ON_KEY_RIGHT')
         elif self.tipo_juego == 'SNAKE':
-            # Llamamos a las funciones internas para Snake
+            # cambios tanque
             if key == 'UP': self.snake_cambiar_direccion('UP')
             elif key == 'DOWN': self.snake_cambiar_direccion('DOWN')
             elif key == 'LEFT': self.snake_cambiar_direccion('LEFT')
             elif key == 'RIGHT': self.snake_cambiar_direccion('RIGHT')
+            self.snake_mover_jugador()
 
 
     def dibujar(self):
@@ -321,8 +322,9 @@ class Juego:
                     if verbo == 'SPAWN' and objeto == 'PLAYER': self.snake_spawn_jugador(accion)
                     if verbo == 'SPAWN' and objeto == 'FOOD': self.snake_spawn_comida()
                     if verbo == 'SPAWN' and objeto == 'FRUIT': self.snake_spawn_fruta()
+                    #Cambio juego de tanques se elimino el move
                     if verbo == 'SPAWN' and objeto == 'POWER_UP': self.snake_spawn_power()
-                    if verbo == 'MOVE' and objeto == 'PLAYER': self.snake_mover_jugador()
+                   
                     if verbo == 'GROW': self.snake_crecer()
                     if verbo == 'SPAWN' and objeto == 'CLOUD'and self.level=="NYAN_CAT":
                         x, y = accion['params'][0]
@@ -488,67 +490,17 @@ class Juego:
                 break
 
     def snake_mover_jugador(self):
+        #cambios tanque
         if not self.serpiente_cuerpo: return
         cabeza_x, cabeza_y = self.serpiente_cuerpo[0]
         dir_x, dir_y = self.serpiente_direccion
-        nueva_cabeza = (cabeza_x + dir_x, cabeza_y + dir_y)
-        #Acabar si se choca con una nube + condicion de nivel
-        if (self.level=="NYAN_CAT")and(nueva_cabeza in self.nubes):
-            if self.puntuacion >0:
-                self.puntuacion=0
-                self.ejecutar_evento('ON_START')
-            else:
-                self.juego_terminado=True
-            return
+        nueva_cabeza = (cabeza_x + (dir_x), cabeza_y + (dir_y))
         
-        #Acabar si se choca con una pared + condicion de nivel
-        if not (0 <= nueva_cabeza[0] < self.ancho and 0 <= nueva_cabeza[1] < self.alto):
-            if (self.puntuacion >0):
-                if self.inmortal: self.ejecutar_evento('ON_RESET')  
-                else:
-                    self.puntuacion=0
-                    self.ejecutar_evento('ON_START')           
-            else:
-                if self.inmortal:
-                    self.ejecutar_evento('ON_RESET')     
-                else: self.ejecutar_evento('ON_COLLISION_WALL')
-            return
-
-        #Acabar si se choca con el cuerpo + condicion de nivel
-        if nueva_cabeza in self.serpiente_cuerpo[:-1]:
-            if (self.puntuacion >0):
-                if self.inmortal: pass  
-                else:
-                    self.puntuacion=0
-                    self.ejecutar_evento('ON_START')
-            else:
-                if self.inmortal: pass
-                else: self.ejecutar_evento('ON_COLLISION_SELF')
-            return
-        
-        #Acabar si se choca con la fruta venenosa + condicion de nivel
-        if (self.level=="ENTUSIASTA")and(nueva_cabeza == self.pos_fruta):
-            if self.puntuacion >= 10:
-                self.ejecutar_evento("ON_EAT_FRUIT")
-            else:
-                if self.inmortal: pass
-                else: self.ejecutar_evento("ON_POISON")
-            return
-        
-        #Activar inmortalidad
-        if (self.level=="ENTUSIASTA")and(nueva_cabeza == self.pos_power):
-            self.temporizador = None
-            self.snake_activar_inmortal()
-            self.pos_power = None
-            self.powercool = True
-            threading.Timer(15, self.snake_fin_cooldown).start()
 
         self.serpiente_cuerpo.insert(0, nueva_cabeza)
         
-        if nueva_cabeza == self.posicion_comida:
-            self.ejecutar_evento('ON_EAT_FOOD')
-        else:
-            self.serpiente_cuerpo.pop()
+        
+        self.serpiente_cuerpo.pop()
 
     def snake_fin_cooldown(self):
         self.powercool = False
@@ -566,16 +518,19 @@ class Juego:
         self.inmortal = False
         self.cabeza = '#00FF00'
         self.cuerpo = '#33CC33'
-
+         
+     #cambios juego de tanques
     def snake_cambiar_direccion(self, direccion):
-        if direccion == 'UP' and self.serpiente_direccion[1] != 1:
-            self.serpiente_direccion = (0, -1)
-        elif direccion == 'DOWN' and self.serpiente_direccion[1] != -1:
-            self.serpiente_direccion = (0, 1)
-        elif direccion == 'LEFT' and self.serpiente_direccion[0] != 1:
-            self.serpiente_direccion = (-1, 0)
-        elif direccion == 'RIGHT' and self.serpiente_direccion[0] != -1:
-            self.serpiente_direccion = (1, 0)
+        v=0.1
+
+        if direccion == 'UP' :
+            self.serpiente_direccion = (0, -v)
+        elif direccion == 'DOWN' :
+            self.serpiente_direccion = (0, v)
+        elif direccion == 'LEFT' :
+            self.serpiente_direccion = (-v, 0)
+        elif direccion == 'RIGHT' :
+            self.serpiente_direccion = (v, 0)
 
     def snake_crecer(self):
         pass

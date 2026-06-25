@@ -31,15 +31,14 @@ class Juego:
         # Configurar la accion al cerrar la ventana ('X' de la barra de titulo)
         self.root.protocol("WM_DELETE_WINDOW", self.cerrar_ventana)
         
-        if self.tipo_juego == "TANKS":
-            self.taman_celda = 12 # Pixeles por celda
-        else:
-            self.taman_celda = 25 # Pixeles por celda
+        if self.tipo_juego == "TANKS": self.taman_celda = 12 # Pixeles por celda
+        else: self.taman_celda = 25 # Pixeles por celda
         self.ancho_canvas = self.ancho * self.taman_celda
         self.alto_canvas = self.alto * self.taman_celda
         
         # Canvas para dibujar el juego
-        self.canvas = tk.Canvas(self.root, width=self.ancho_canvas, height=self.alto_canvas, bg='#111111')
+        if self.tipo_juego == "TANKS": self.canvas = tk.Canvas(self.root, width=self.ancho_canvas, height=self.alto_canvas, bg="#033A01")
+        else: self.canvas = tk.Canvas(self.root, width=self.ancho_canvas, height=self.alto_canvas, bg='#111111')
         self.canvas.pack(side=tk.LEFT, padx=10, pady=10)
 
         # Marco lateral para la puntuacion y controles

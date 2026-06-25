@@ -95,6 +95,7 @@ class Juego:
             self.enemy_tanks = []
         self.timer_gravedad = 0
         self.ejecutar_evento('ON_START')
+        if self.tipo_juego == "TANKS": self.tanks_generar_bordes()
         self.timer_id = None # Para controlar el loop de Tkinter
     def run(self):
         # Inicia el ciclo principal de juego de Tkinter
@@ -359,16 +360,73 @@ class Juego:
                     colores[valor]
                 )
 
+    #Funcion para obtener una posicion valida de spawneo (tanks)
+
     def obtener_posicion_valida(self, shape):
+
         sprite = shape['states'][0]
 
         alto_sprite = len(sprite)
         ancho_sprite = len(sprite[0])
 
-        x = random.randint(0, self.ancho - ancho_sprite)
-        y = random.randint(0, self.alto - alto_sprite)
+        while True:
 
-        return x, y
+            MARGEN = 1
+
+            x = random.randint(MARGEN, self.ancho - ancho_sprite - MARGEN)
+            y = random.randint(MARGEN, self.alto - alto_sprite - MARGEN)
+
+            libre = True
+
+            #Comprobar celda en el grid (para obstaculos)
+
+            for fila_idx in range(alto_sprite):
+                for col_idx in range(ancho_sprite):
+
+                    if self.grid[y + fila_idx][x + col_idx] == 1:
+                        libre = False
+                        break
+
+                if not libre:
+                    break
+            if not libre:
+                continue
+
+            # Verificar jugador
+            if self.player_tanks:
+
+                sprite_player = self.player_tanks['shape']['states'][0]
+
+                alto_player = len(sprite_player)
+                ancho_player = len(sprite_player[0])
+
+                if not (
+                    x + ancho_sprite <= self.player_tanks['x'] or
+                    self.player_tanks['x'] + ancho_player <= x or
+                    y + alto_sprite <= self.player_tanks['y'] or
+                    self.player_tanks['y'] + alto_player <= y
+                ):
+                    libre = False
+
+            # Verificar enemigos
+            for enemigo in self.enemy_tanks:
+
+                sprite_enemy = enemigo['shape']['states'][0]
+
+                alto_enemy = len(sprite_enemy)
+                ancho_enemy = len(sprite_enemy[0])
+
+                if not (
+                    x + ancho_sprite <= enemigo['x'] or
+                    enemigo['x'] + ancho_enemy <= x or
+                    y + alto_sprite <= enemigo['y'] or
+                    enemigo['y'] + alto_enemy <= y
+                ):
+                    libre = False
+                    break
+
+            if libre:
+                return x, y
 
 
     def ejecutar_evento(self, nombre_evento):
@@ -397,15 +455,18 @@ class Juego:
                         self.nubes.append((x, y))
                 if self.tipo_juego == 'TANKS':
                     if verbo == 'SPAWN' and objeto == 'PLAYER': self.tanks_spawn_player()
-                    if verbo == 'SPAWN' and objeto == 'ENEMY' : self.tanks_spawn_enemy()                if self.tipo_juego == 'BRICK_TANKS':
-                    if verbo == 'SPAWN' and objeto == 'WALL':
-                          self.tank_spawn_wall(accion)                
+                    if verbo == 'SPAWN' and objeto == 'ENEMY' : 
+                        self.tanks_spawn_enemy()   
+                    if verbo == 'SPAWN' and objeto == 'WALL'  : self.tank_spawn_wall(accion)                
 
     # METODOS DE LOGICA DE JUEGO (MANTENIDOS DEL ARCHIVO ORIGINAL)
     # ---------------------------------------------------------------------
     def tank_spawn_wall(self, accion):
      x, y = accion['params'][0]
      self.grid[y][x] = 1
+
+    def tanks_spawn_wall(self, x, y):
+        self.grid[y][x] = 1 
 
     def tetris_spawn_pieza(self, tipo_spawn = "NORMAL"):
       
@@ -706,6 +767,28 @@ class Juego:
             'rotation': 0,
             'shape': enemy_shape
         })
+
+    def tanks_generar_bordes(self):
+
+        # Superior e inferior
+        for x in range(self.ancho):
+
+            self.tanks_spawn_wall(x, 0)
+
+            self.tanks_spawn_wall(
+                x,
+                self.alto - 1
+            )
+
+        # Laterales
+        for y in range(1, self.alto - 1):
+
+            self.tanks_spawn_wall(0, y)
+
+            self.tanks_spawn_wall(
+                self.ancho - 1,
+                y
+            )
 
 
     # METODOS DE SALIDA (ADAPTADOS A GUI)

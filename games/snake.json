@@ -2,7 +2,7 @@
   "shapes": {
     "PIXEL": {
       "body": "CIRCULO", 
-      "level": "ENTUSIASTA", 
+      "level": "NYAN_CAT", 
       "color": "#00FFFF", 
       "states": [
         [
@@ -12,6 +12,11 @@
         ]
       ], 
       "chance": 1, 
+      "level": "ENTUSIASTA", 
+      "color": "#00FFFF", 
+      "speed": 0, 
+      "endurance": 0, 
+      "type": "", 
       "power_up": 10
     }
   }, 

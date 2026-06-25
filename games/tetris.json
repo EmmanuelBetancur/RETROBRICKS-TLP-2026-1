@@ -75,6 +75,11 @@
         ]
       ], 
       "chance": 50, 
+      "level": "", 
+      "color": "#00CC66", 
+      "speed": 0, 
+      "endurance": 0, 
+      "type": "", 
       "power_up": ""
     }, 
     "Z_PIECE": {

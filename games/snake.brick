@@ -6,7 +6,7 @@ GAME_GRID (18, 18)
 # --- Definicion de Elementos ---
 DEFINE SHAPE PIXEL:
   BODY CIRCULO
-  LEVEL ENTUSIASTA
+  LEVEL NYAN_CAT
   POWER_UP 10
   STATE 1:
     [1]

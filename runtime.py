@@ -31,12 +31,14 @@ class Juego:
         # Configurar la accion al cerrar la ventana ('X' de la barra de titulo)
         self.root.protocol("WM_DELETE_WINDOW", self.cerrar_ventana)
         
-        self.taman_celda = 25 # Pixeles por celda
+        if self.tipo_juego == "TANKS": self.taman_celda = 12 # Pixeles por celda
+        else: self.taman_celda = 25 # Pixeles por celda
         self.ancho_canvas = self.ancho * self.taman_celda
         self.alto_canvas = self.alto * self.taman_celda
         
         # Canvas para dibujar el juego
-        self.canvas = tk.Canvas(self.root, width=self.ancho_canvas, height=self.alto_canvas, bg='#111111')
+        if self.tipo_juego == "TANKS": self.canvas = tk.Canvas(self.root, width=self.ancho_canvas, height=self.alto_canvas, bg="#033A01")
+        else: self.canvas = tk.Canvas(self.root, width=self.ancho_canvas, height=self.alto_canvas, bg='#111111')
         self.canvas.pack(side=tk.LEFT, padx=10, pady=10)
 
         # Marco lateral para la puntuacion y controles
@@ -52,6 +54,7 @@ class Juego:
 
         # Configurar eventos de teclado. Usamos <Key> para capturar cualquier tecla
         self.root.bind('<Key>', self.manejar_input_gui)
+        self.velocidad_gravedad = 0.1
         
         if self.tipo_juego == 'TETRIS':
             self.pieza_actual = None
@@ -85,10 +88,14 @@ class Juego:
                  '#4B0082',
                  '#9400D3'
                         ]
+        
+        if self.tipo_juego == "TANKS":
+            self.player_tanks = None
+            self.enemy_tanks = []
         self.timer_gravedad = 0
         self.ejecutar_evento('ON_START')
+        if self.tipo_juego == "TANKS": self.tanks_generar_bordes()
         self.timer_id = None # Para controlar el loop de Tkinter
-
     def run(self):
         # Inicia el ciclo principal de juego de Tkinter
         self.root.after(50, self.game_loop) 
@@ -144,6 +151,7 @@ class Juego:
 
         # Colores
         COLOR_GRID_FIJA = '#343434' # Gris oscuro para las celdas fijadas (Tetris)
+        COLOR_WALL = '#FFD700'
         if self.tipo_juego == 'TETRIS' and self.pieza_actual:
             COLOR_PIEZA = self.color_actual
         if self.tipo_juego== "SNAKE":
@@ -152,6 +160,12 @@ class Juego:
          COLOR_FOOD = '#FF0000'      # Rojo
          COLOR_FRUIT = "#ECFC09"     # Amarillo
          COLOR_POWER = "#0D09FC"     # Azul
+        if self.tipo_juego == "SNAKE":    
+            COLOR_SNAKE_CABEZA = self.cabeza # Verde brillante
+            COLOR_SNAKE_CUERPO = self.cuerpo # Verde normal
+            COLOR_FOOD = '#FF0000'      # Rojo
+            COLOR_FRUIT = "#ECFC09"     # Amarillo
+            COLOR_POWER = "#0D09FC"     # Azul
        
 
         # 1. Dibujar la cuadricula estatica (grid base)
@@ -224,6 +238,31 @@ class Juego:
                         if self.level=="NYAN_CAT" else COLOR_SNAKE_CUERPO
 
                     self.dibujar_cuerpo(x, y, color)
+        for y in range(self.alto):
+            for x in range(self.ancho):
+                 if self.grid[y][x] == 1:
+                   if self.tipo_juego == 'TANKS':
+                        self.dibujar_celda(x, y, COLOR_WALL)
+                   else:
+                        self.dibujar_celda(x, y, COLOR_GRID_FIJA)
+
+        if self.tipo_juego == "TANKS":
+
+            if self.player_tanks:
+                self.dibujar_tanque(
+                    self.player_tanks['x'],
+                    self.player_tanks['y'],
+                    self.player_tanks['shape'],
+                    self.player_tanks
+                )
+
+            for enemigo in self.enemy_tanks:
+                self.dibujar_tanque(
+                    enemigo['x'],
+                    enemigo['y'],
+                    enemigo['shape'],
+                    enemigo
+                )           
 
 
     #Dibujar la figura que toma el cuerpo
@@ -303,6 +342,97 @@ class Juego:
          y1 + ts*0.40,
          fill='black')
 
+    #Dibujar tanques de tanks
+    def dibujar_tanque(self, x, y, shape, tanque):
+        
+        sprite = shape["states"][tanque["rotation"]]
+
+        colores = {
+            1: shape['color'],
+            2: "#808080",
+            3: "#000000"
+        }
+
+        for fila_idx, fila in enumerate(sprite):
+            for col_idx, valor in enumerate(fila):
+
+                if valor == 0:
+                    continue
+
+                self.dibujar_celda(
+                    x + col_idx,
+                    y + fila_idx,
+                    colores[valor]
+                )
+
+    #Funcion para obtener una posicion valida de spawneo (tanks)
+
+    def obtener_posicion_valida(self, shape):
+
+        sprite = shape['states'][0]
+
+        alto_sprite = len(sprite)
+        ancho_sprite = len(sprite[0])
+
+        while True:
+
+            MARGEN = 1
+
+            x = random.randint(MARGEN, self.ancho - ancho_sprite - MARGEN)
+            y = random.randint(MARGEN, self.alto - alto_sprite - MARGEN)
+
+            libre = True
+
+            #Comprobar celda en el grid (para obstaculos)
+
+            for fila_idx in range(alto_sprite):
+                for col_idx in range(ancho_sprite):
+
+                    if self.grid[y + fila_idx][x + col_idx] == 1:
+                        libre = False
+                        break
+
+                if not libre:
+                    break
+            if not libre:
+                continue
+
+            # Verificar jugador
+            if self.player_tanks:
+
+                sprite_player = self.player_tanks['shape']['states'][0]
+
+                alto_player = len(sprite_player)
+                ancho_player = len(sprite_player[0])
+
+                if not (
+                    x + ancho_sprite <= self.player_tanks['x'] or
+                    self.player_tanks['x'] + ancho_player <= x or
+                    y + alto_sprite <= self.player_tanks['y'] or
+                    self.player_tanks['y'] + alto_player <= y
+                ):
+                    libre = False
+
+            # Verificar enemigos
+            for enemigo in self.enemy_tanks:
+
+                sprite_enemy = enemigo['shape']['states'][0]
+
+                alto_enemy = len(sprite_enemy)
+                ancho_enemy = len(sprite_enemy[0])
+
+                if not (
+                    x + ancho_sprite <= enemigo['x'] or
+                    enemigo['x'] + ancho_enemy <= x or
+                    y + alto_sprite <= enemigo['y'] or
+                    enemigo['y'] + alto_enemy <= y
+                ):
+                    libre = False
+                    break
+
+            if libre:
+                return x, y
+
 
     def ejecutar_evento(self, nombre_evento):
         if nombre_evento in self.datos_juego['events']:
@@ -328,11 +458,23 @@ class Juego:
                     if verbo == 'SPAWN' and objeto == 'CLOUD'and self.level=="NYAN_CAT":
                         x, y = accion['params'][0]
                         self.nubes.append((x, y))
+                if self.tipo_juego == 'TANKS':
+                    if verbo == 'SPAWN' and objeto == 'PLAYER': self.tanks_spawn_player()
+                    if verbo == 'SPAWN' and objeto == 'ENEMY' : 
+                        self.tanks_spawn_enemy()   
+                    if verbo == 'SPAWN' and objeto == 'WALL'  : self.tank_spawn_wall(accion)                
 
     # METODOS DE LOGICA DE JUEGO (MANTENIDOS DEL ARCHIVO ORIGINAL)
     # ---------------------------------------------------------------------
+    def tank_spawn_wall(self, accion):
+     x, y = accion['params'][0]
+     self.grid[y][x] = 1
+
+    def tanks_spawn_wall(self, x, y):
+        self.grid[y][x] = 1 
 
     def tetris_spawn_pieza(self, tipo_spawn = "NORMAL"):
+      
 
       shapes = self.datos_juego['shapes']
 
@@ -580,6 +722,78 @@ class Juego:
 
     def snake_crecer(self):
         pass
+
+    def tanks_spawn_player(self):
+        player_shape = None
+
+        for nombre, shape in self.datos_juego['shapes'].items():
+            if shape['type'] == 'PLAYER':
+                player_shape = shape
+                break
+
+        if not player_shape:
+            return
+
+        x, y = self.obtener_posicion_valida(player_shape)
+
+        self.player_tanks = {
+            'x': x,
+            'y': y,
+            'color': player_shape['color'],
+            'speed': player_shape['speed'],
+            'endurance': player_shape['endurance'],
+            'rotation': 0,
+            'shape': player_shape
+        }
+
+    def tanks_spawn_enemy(self):
+
+        self.enemies_shapes = []
+        for nombre, shape in self.datos_juego['shapes'].items():
+            if shape['type'] == 'ENEMY':
+                self.enemies_shapes.append(shape)
+        if not self.enemies_shapes:
+            print("No se pudieron encontrar los tanques enemigos.")
+            self.root.destroy()
+            sys.exit(0)
+        enemy_shape = random.choice(self.enemies_shapes)
+        while True:
+            x, y = self.obtener_posicion_valida(enemy_shape)
+
+            if (x, y) != (self.player_tanks['x'], self.player_tanks['y']):
+                break
+
+        self.enemy_tanks.append({
+            'x': x,
+            'y': y,
+            'color': enemy_shape['color'],
+            'speed': enemy_shape['speed'],
+            'endurance': enemy_shape['endurance'],
+            'rotation': 0,
+            'shape': enemy_shape
+        })
+
+    def tanks_generar_bordes(self):
+
+        # Superior e inferior
+        for x in range(self.ancho):
+
+            self.tanks_spawn_wall(x, 0)
+
+            self.tanks_spawn_wall(
+                x,
+                self.alto - 1
+            )
+
+        # Laterales
+        for y in range(1, self.alto - 1):
+
+            self.tanks_spawn_wall(0, y)
+
+            self.tanks_spawn_wall(
+                self.ancho - 1,
+                y
+            )
 
 
     # METODOS DE SALIDA (ADAPTADOS A GUI)

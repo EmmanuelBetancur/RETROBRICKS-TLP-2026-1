@@ -70,6 +70,9 @@ class Parser:
      level=""
      power_up=""
      chance = 1
+     tipo = ""
+     speed = 0
+     endurance = 0
      
      color = "#00FFFF"
    
@@ -103,7 +106,25 @@ class Parser:
 
             self.consumir('POWER_UP')
 
-            power_up = int(self.consumir())       
+            power_up = int(self.consumir())    
+        
+        elif self.tokens[self.posicion] == 'TYPE':
+
+            self.consumir('TYPE')
+
+            tipo = self.consumir()
+
+        elif self.tokens[self.posicion] == 'SPEED':
+
+            self.consumir('SPEED')
+
+            speed = int(self.consumir()) 
+
+        elif self.tokens[self.posicion] == 'ENDURANCE':
+
+            self.consumir('ENDURANCE')
+
+            endurance = int(self.consumir())                
             
         #Viejos tokens
         elif self.tokens[self.posicion] == 'STATE':
@@ -150,7 +171,10 @@ class Parser:
         'power_up':power_up,
         'states': estados,
         'chance': chance,
-        'color': color
+        'color': color,    
+        'type': tipo,
+        'speed': speed,
+        'endurance': endurance
     }
 
     # --- FUNCION CORREGIDA ---

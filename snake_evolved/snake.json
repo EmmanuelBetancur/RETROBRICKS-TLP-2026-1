@@ -1,0 +1,199 @@
+{
+  "shapes": {
+    "PIXEL": {
+      "body": "CIRCULO", 
+      "level": "ENTUSIASTA", 
+      "color": "#00FFFF", 
+      "states": [
+        [
+          [
+            1
+          ]
+        ]
+      ], 
+      "chance": 1, 
+      "power_up": 10
+    }
+  }, 
+  "tipo_juego": "SNAKE", 
+  "config": {
+    "grid_size": [
+      18, 
+      18
+    ]
+  }, 
+  "events": {
+    "ON_KEY_DOWN": [
+      {
+        "params": [], 
+        "accion": "SET_DIRECTION", 
+        "objeto": "DOWN"
+      }
+    ], 
+    "ON_EAT_FRUIT": [
+      {
+        "params": [], 
+        "accion": "DECREASE_SCORE", 
+        "objeto": "10"
+      }, 
+      {
+        "params": [
+          "RANDOM"
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "FRUIT"
+      }
+    ], 
+    "ON_EAT_FOOD": [
+      {
+        "params": [], 
+        "accion": "INCREASE_SCORE", 
+        "objeto": "10"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "GROW", 
+        "objeto": "PLAYER"
+      }, 
+      {
+        "params": [
+          "RANDOM"
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "FOOD"
+      }
+    ], 
+    "ON_KEY_RIGHT": [
+      {
+        "params": [], 
+        "accion": "SET_DIRECTION", 
+        "objeto": "RIGHT"
+      }
+    ], 
+    "ON_TICK": [
+      {
+        "params": [
+          "FORWARD"
+        ], 
+        "accion": "MOVE", 
+        "objeto": "PLAYER"
+      }
+    ], 
+    "ON_COLLISION_WALL": [
+      {
+        "params": [], 
+        "accion": "GAME_OVER", 
+        "objeto": null
+      }
+    ], 
+    "ON_COLLISION_SELF": [
+      {
+        "params": [], 
+        "accion": "GAME_OVER", 
+        "objeto": null
+      }
+    ], 
+    "ON_START": [
+      {
+        "params": [
+          [
+            4, 
+            4
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "CLOUD"
+      }, 
+      {
+        "params": [
+          [
+            8, 
+            8
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "CLOUD"
+      }, 
+      {
+        "params": [
+          [
+            9, 
+            9
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "PLAYER"
+      }, 
+      {
+        "params": [
+          "RANDOM"
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "FOOD"
+      }, 
+      {
+        "params": [
+          "RANDOM"
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "FRUIT"
+      }
+    ], 
+    "ON_POISON": [
+      {
+        "params": [], 
+        "accion": "GAME_OVER", 
+        "objeto": null
+      }
+    ], 
+    "ON_POWER_UP": [
+      {
+        "params": [], 
+        "accion": "SPAWN", 
+        "objeto": "POWER_UP"
+      }
+    ], 
+    "ON_KEY_UP": [
+      {
+        "params": [], 
+        "accion": "SET_DIRECTION", 
+        "objeto": "UP"
+      }
+    ], 
+    "ON_KEY_LEFT": [
+      {
+        "params": [], 
+        "accion": "SET_DIRECTION", 
+        "objeto": "LEFT"
+      }
+    ], 
+    "ON_RESET": [
+      {
+        "params": [
+          [
+            9, 
+            9
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "PLAYER"
+      }, 
+      {
+        "params": [
+          "RANDOM"
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "FOOD"
+      }, 
+      {
+        "params": [
+          "RANDOM"
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "FRUIT"
+      }
+    ]
+  }
+}

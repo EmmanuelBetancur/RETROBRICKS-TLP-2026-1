@@ -1,0 +1,36 @@
+Modificaciones al copilador:
+. Se agregó el token POWER_UP para permitir definir la duración de la inmortalidad desde el archivo snake.brick.(Emmanuel Betancur)
+. Se actualizó el parser para reconocer el atributo POWER_UP dentro de la definición de los SHAPE.(Emmanuel Betancur)
+. Se actualizo el parser en la función "parsear_shape()" para que reconozca los tipos de cuerpo y el nivel que se establezca en el snake.brick con las variables body y level respectivamente. (Santiago Agudelo)
+
+Modificaciones al runtime:
+. Se agregó soporte para frutas venenosas que penalizan al jugador y provocan fin de juego cuando la puntuación es insuficiente.(Emmanuel Betancur)
+. Se implementó la generación aleatoria de power ups de inmortalidad durante la partida. (Emmanuel Betancur)
+. Se agregó la lógica de inmortalidad temporal permitiendo sobrevivir a colisiones con paredes, el cuerpo de la serpiente y frutas venenosas. (Emmanuel Betancur)
+. Se implementó un temporizador configurable para controlar la duración del efecto de inmortalidad. (Emmanuel Betancur)
+. Se agregó una funcion de cooldown para evitar la aparición continua de power ups. (Emmanuel Betancur)
+. Se modificó el sistema de renderizado para permitir cambios dinámicos de color en la cabeza y el cuerpo de la serpiente durante la inmortalidad.
+. Se agregó el evento ON_RESET para reiniciar la posición del jugador al consumir una vida por colisión mientras está inmortal. (Emmanuel Betancur)
+. Se definieron nuevas variables para reconocer el nivel y cuerpo de la serpiente con el nombre "self.level" para el nivel y "self.body" para el tipo de cuerpo. (Santiago Agudelo)
+. Se agrego la función dibujar_cuerpo(self,x,y,color) para construir el cuerpo de la serpientes con nuevas semánticas como el circulo y el triangulo, además se dejo la opción de construir el cuerpo en forma de cuadrado. (Santiago Agudelo)
+. Se clasificaron las funciones relacionadas con los porwer ups y la cabeza del nivel "NYAN_CAT" según el nivel en que se defina desde snake.brick. (Santiago Agudelo)
+. Se agregaron las nuevas reglas del juego para que acabe en el nivel "NYAN_CAT" en la función snake_mover_jugador donde se verifican las colisiones. (Santiago Agudelo)
+. Se define una versión estándar de ejecución del juego al detectar errores en la gramática de las variables level y body en el archivo .brick. (Santiago Agudelo)
+. Se agrego el diseño de tener ojos en la cabeza de la serpiente, y una cola multicolor, para el nivel nyan cat. (Gihad Fares)
+. Para la logica de las nubes, se agregan primeramente al runtime en caso de que self.tipo_juego == tetris, una lista vacía de las nubes, la cual contendrá las coordenadas de las nubes, las cuales son especificadas en el snake.brick, y para la colisión se verifica en que coordenadas está la cabeza de la serpiente, asi si estas coinciden, se atribuye a una colisión, y así baja a 0 el puntaje o se termina el juego en caso de que el puntaje ya se encuentre en 0.(Gihad Fares)
+
+Modificaciones a snake.brick:
+. Se agregó el atributo POWER_UP para definir la duración de la inmortalidad. (Emmanuel Betancur)
+. Se agregó el evento ON_EAT_FRUIT para controlar el comportamiento de las frutas venenosas. (Emmanuel Betancur)
+. Se agregó el evento ON_POISON para gestionar la derrota causada por fruta venenosa. (Emmanuel Betancur)
+. Se agregó el evento ON_RESET para reiniciar la partida sin finalizar el juego. (Emmanuel Betancur)
+. Se agregó el evento ON_POWER_UP para generar power ups de inmortalidad. (Emmanuel Betancur)
+. Se agregó una fruta venenosa de color amarillo y un power up de color azul. (Emmanuel Betancur)
+. Se agregaron dos variables "BODY" y "LEVEL" al shape para definir el tipo de cuerpo que tendrá el snake al ejecutarse y en que nivel va funcionar. (Santiago Agudelo)
+
+Modificaciones a snake.bnf:
+. Se agregó la producción POWER_UP dentro de la definición de SHAPE. (Emmanuel Betancur)
+. Se agregaron los eventos EAT_FRUIT, POISON, RESET y POWER_UP a la gramática del lenguaje. (Emmanuel Betancur)
+. Se agregó la acción DECREASE_SCORE para permitir la reducción de puntos. (Emmanuel Betancur)
+. Se modifico la gramática para agregar los atributos "<body>" y "<level>" como tokens validos a "<elemento_shape>", ahora un shape puede contener atributos adicionales como body y level. (Santiago Agudelo)
+. Se amplió la gramática para nuevas reglas, nubes, nyan, etc. (Gihad Fares)

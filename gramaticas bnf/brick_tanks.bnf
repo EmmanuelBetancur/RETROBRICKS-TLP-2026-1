@@ -1,0 +1,42 @@
+<programa> ::= <tipo_juego> <grid> <definiciones> <eventos>
+
+<tipo_juego> ::= "GAME TYPE" "BRICK_TANKS"
+<grid> ::= "GAME GRID" "(" "numero" "," "numero" ")"
+<definiciones> ::= <definiciones_shape> | <definicion_shape> <definiciones>
+<eventos> ::= <evento> |  <evento> <eventos>
+
+<definicion_shape> ::= "DEFINIR" "IDENTIDAD" "identificador" ":" "contenido_identidad" "END"
+<contenido_identidad> ::= <elemento_identidad> | <elemento_identidad> <contenido_identidad>
+<elemento_identidad> ::= <vida> | <velocidad> | <daño> | <tipo_identidad>
+<vida> ::= "HEALTH" <numero>
+<velocidad> ::= "VELOCIDAD" <numero>
+<daño> ::= "DAÑO" <numero>
+<tipo_entidad> ::= "TIPO"  <tipo>
+<tipo> ::= "JUGADOR" | "ENEMIGO_1" | "ENEMIGO_2" | "PARED" | "JEFE"
+<evento> ::= "ON" <nombre_evento_tank> ":" <acciones_tank> "END"
+<nombre_evento_tank> ::= "START" | "TICK" | "KEY_UP" | "KEY_DOWN" | "KEY_LEFT" | "KEY_RIGHT" | "KEY_FIRE" | "COLLISION_WALL" | "COLLISION_ENEMY" | "COLLISION_BASE" | "DESTROY_ENEMY" | "GAME_OVER"
+<acciones_tank> ::= <accion_tank> | <accion_tank> <acciones_tank>
+<accion_tank> ::=  <accion_spawn_player> | <accion_spawn_enemy> | <accion_spawn_wall> | <accion_move> | <accion_set_direction> | <accion_fire> | <accion_destroy> | <accion_game_over>
+
+<accion_spawn_player> ::= "SPAWN" "PLAYER" "AT" <coordenadas>
+
+<accion_spawn_enemy> ::= "SPAWN" "ENEMY" "AT" <coordenadas>
+
+<accion_spawn_wall> ::= "SPAWN" "WALL" "AT" <coordenadas>
+
+<accion_move> ::= "MOVE" <objeto> <direccion>
+
+<objeto> ::= "PLAYER" | "ENEMY"
+
+<direccion>     ::= "UP" | "DOWN" | "LEFT" | "RIGHT"
+
+<accion_fire> ::= "FIRE" <objeto>
+
+<accion_destroy> ::= "DESTROY" <objeto>
+
+<accion_gameover> ::= "GAME_OVER"
+
+<identificador> ::= <letra> | <letra> <identificador>
+<numero>        ::= <digito> | <digito> <numero>
+<letra>         ::= "A"..."Z" | "_"
+<digito>        ::= "0"..."9"

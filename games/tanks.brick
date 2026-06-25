@@ -1,8 +1,110 @@
-GAME_TYPE BRICK_TANKS
+# tanks.brick
+GAME_TYPE TANKS
 
-GAME_GRID (18, 18)
+GAME_GRID (50, 50)
+
+DEFINE SHAPE RED_TANK:
+    TYPE PLAYER
+    SPEED 10
+    ENDURANCE 4
+    COLOR #FF0033
+    STATE 1:
+    [0,0,3,0,0]
+    [0,0,3,0,0]
+    [2,1,1,1,2]
+    [2,1,3,1,2]
+    [2,1,1,1,2]
+
+    STATE 2:
+    [2,2,2,0,0]
+    [1,1,1,0,0]
+    [1,3,1,3,3]
+    [1,1,1,0,0]
+    [2,2,2,0,0]
+
+    STATE 3:
+    [2,1,1,1,2]
+    [2,1,3,1,2]
+    [2,1,1,1,2]
+    [0,0,3,0,0]
+    [0,0,3,0,0]
+
+    STATE 4:
+    [0,0,2,2,2]
+    [0,0,1,1,1]
+    [3,3,1,3,1]
+    [0,0,1,1,1]
+    [0,0,2,2,2]
+END
+
+DEFINE SHAPE BLUE_TANK:
+    TYPE ENEMY
+    SPEED 10
+    ENDURANCE 2
+    COLOR #5900ff
+    STATE 1:
+    [0,3,0]
+    [0,3,0]
+    [2,1,2]
+    [1,1,1]
+    [2,1,2]
+
+    STATE 2:
+    [2,1,2,0,0]
+    [1,1,1,3,3]
+    [2,1,2,0,0]
+
+    STATE 3:
+    [2,1,2]
+    [1,1,1]
+    [2,1,2]
+    [0,3,0]
+    [0,3,0]
+
+    STATE 4:
+    [0,0,2,1,2]
+    [3,3,1,1,1]
+    [0,0,2,1,2]
+END
+
+DEFINE SHAPE GREEN_TANK:
+    TYPE ENEMY
+    SPEED 6
+    ENDURANCE 3
+    COLOR #15ff00
+    STATE 1:
+    [0,0,3,0,0]
+    [0,0,3,0,0]
+    [2,1,1,1,2]
+    [2,1,3,1,2]
+    [2,1,1,1,2]
+
+    STATE 2:
+    [2,2,2,0,0]
+    [1,1,1,0,0]
+    [1,3,1,3,3]
+    [1,1,1,0,0]
+    [2,2,2,0,0]
+
+    STATE 3:
+    [2,1,1,1,2]
+    [2,1,3,1,2]
+    [2,1,1,1,2]
+    [0,0,3,0,0]
+    [0,0,3,0,0]
+
+    STATE 4:
+    [0,0,2,2,2]
+    [0,0,1,1,1]
+    [3,3,1,3,1]
+    [0,0,1,1,1]
+    [0,0,2,2,2]
+END
 
 ON START:
+    SPAWN PLAYER AT RANDOM
+    SPAWN ENEMY AT RANDOM
+    SPAWN ENEMY AT RANDOM
     SPAWN WALL AT (0,0)
     SPAWN WALL AT (1,0)
     SPAWN WALL AT (2,0)

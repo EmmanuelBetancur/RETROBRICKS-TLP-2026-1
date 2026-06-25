@@ -868,6 +868,1573 @@
         ], 
         "accion": "SPAWN", 
         "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          "GAME_GRID"
+        ], 
+        "accion": "GAME_TYPE", 
+        "objeto": "TANKS"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "(", 
+        "objeto": "50"
+      }, 
+      {
+        "params": [], 
+        "accion": "50", 
+        "objeto": ")"
+      }, 
+      {
+        "params": [
+          "RED_TANK"
+        ], 
+        "accion": "DEFINE", 
+        "objeto": "SHAPE"
+      }, 
+      {
+        "params": [
+          "PLAYER"
+        ], 
+        "accion": ":", 
+        "objeto": "TYPE"
+      }, 
+      {
+        "params": [
+          "ENDURANCE"
+        ], 
+        "accion": "SPEED", 
+        "objeto": "10"
+      }, 
+      {
+        "params": [
+          "#FF0033"
+        ], 
+        "accion": "4", 
+        "objeto": "COLOR"
+      }, 
+      {
+        "params": [
+          ":"
+        ], 
+        "accion": "STATE", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          "3"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "0", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "3"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "]", 
+        "objeto": "["
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "]"
+        ], 
+        "accion": ",", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          "3"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "2", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "2", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "]", 
+        "objeto": "STATE"
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": ":", 
+        "objeto": "["
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "2", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "]"
+        ], 
+        "accion": ",", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "0", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "3"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "3"
+        ], 
+        "accion": "3", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "]", 
+        "objeto": "["
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "]"
+        ], 
+        "accion": ",", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "2", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          "STATE"
+        ], 
+        "accion": "0", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "3", 
+        "objeto": ":"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "2", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "]", 
+        "objeto": "["
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "3", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "]"
+        ], 
+        "accion": ",", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "2", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "3"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "]", 
+        "objeto": "["
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "3", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "]"
+        ], 
+        "accion": ",", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          ":"
+        ], 
+        "accion": "STATE", 
+        "objeto": "4"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "2", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "3"
+        ], 
+        "accion": "]", 
+        "objeto": "["
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "3"
+      }, 
+      {
+        "params": [
+          "3"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "]"
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "1", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "2", 
+        "objeto": ","
+      }, 
+      {
+        "params": [], 
+        "accion": "]", 
+        "objeto": "END"
+      }, 
+      {
+        "params": [
+          "BLUE_TANK"
+        ], 
+        "accion": "DEFINE", 
+        "objeto": "SHAPE"
+      }, 
+      {
+        "params": [
+          "ENEMY"
+        ], 
+        "accion": ":", 
+        "objeto": "TYPE"
+      }, 
+      {
+        "params": [
+          "ENDURANCE"
+        ], 
+        "accion": "SPEED", 
+        "objeto": "10"
+      }, 
+      {
+        "params": [
+          "#5900ff"
+        ], 
+        "accion": "2", 
+        "objeto": "COLOR"
+      }, 
+      {
+        "params": [
+          ":"
+        ], 
+        "accion": "STATE", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "3", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "]", 
+        "objeto": "["
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "3"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "0", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "2", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "]"
+        ], 
+        "accion": ",", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "]", 
+        "objeto": "["
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "STATE"
+        ], 
+        "accion": "2", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "2", 
+        "objeto": ":"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "2", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "]", 
+        "objeto": "["
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "3"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "]"
+        ], 
+        "accion": ",", 
+        "objeto": "3"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          "STATE"
+        ], 
+        "accion": "0", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "3", 
+        "objeto": ":"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "2", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "]"
+        ], 
+        "accion": ",", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "]", 
+        "objeto": "["
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "2", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "3"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "]"
+        ], 
+        "accion": ",", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "3", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "4"
+        ], 
+        "accion": "]", 
+        "objeto": "STATE"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": ":", 
+        "objeto": "["
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "2", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "]"
+        ], 
+        "accion": ",", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "3"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "3", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "1", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [], 
+        "accion": "]", 
+        "objeto": "END"
+      }, 
+      {
+        "params": [
+          "GREEN_TANK"
+        ], 
+        "accion": "DEFINE", 
+        "objeto": "SHAPE"
+      }, 
+      {
+        "params": [
+          "ENEMY"
+        ], 
+        "accion": ":", 
+        "objeto": "TYPE"
+      }, 
+      {
+        "params": [
+          "ENDURANCE"
+        ], 
+        "accion": "SPEED", 
+        "objeto": "6"
+      }, 
+      {
+        "params": [
+          "#15ff00"
+        ], 
+        "accion": "3", 
+        "objeto": "COLOR"
+      }, 
+      {
+        "params": [
+          ":"
+        ], 
+        "accion": "STATE", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          "3"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "0", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "3"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "]", 
+        "objeto": "["
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "]"
+        ], 
+        "accion": ",", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          "3"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "2", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "2", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "]", 
+        "objeto": "STATE"
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": ":", 
+        "objeto": "["
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "2", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "]"
+        ], 
+        "accion": ",", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "0", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "3"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "3"
+        ], 
+        "accion": "3", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "]", 
+        "objeto": "["
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "]"
+        ], 
+        "accion": ",", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "2", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          "STATE"
+        ], 
+        "accion": "0", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "3", 
+        "objeto": ":"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "2", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "]", 
+        "objeto": "["
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "3", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "]"
+        ], 
+        "accion": ",", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "2", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "3"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "]", 
+        "objeto": "["
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "3", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "]"
+        ], 
+        "accion": ",", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          ":"
+        ], 
+        "accion": "STATE", 
+        "objeto": "4"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "2", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "3"
+        ], 
+        "accion": "]", 
+        "objeto": "["
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "3"
+      }, 
+      {
+        "params": [
+          "3"
+        ], 
+        "accion": "1", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          "]"
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": "[", 
+        "objeto": "0"
+      }, 
+      {
+        "params": [
+          "1"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "1"
+      }, 
+      {
+        "params": [
+          "["
+        ], 
+        "accion": "1", 
+        "objeto": "]"
+      }, 
+      {
+        "params": [
+          "0"
+        ], 
+        "accion": "0", 
+        "objeto": ","
+      }, 
+      {
+        "params": [
+          ","
+        ], 
+        "accion": ",", 
+        "objeto": "2"
+      }, 
+      {
+        "params": [
+          "2"
+        ], 
+        "accion": "2", 
+        "objeto": ","
+      }, 
+      {
+        "params": [], 
+        "accion": "]", 
+        "objeto": "END"
+      }, 
+      {
+        "params": [
+          ":"
+        ], 
+        "accion": "ON", 
+        "objeto": "START"
+      }, 
+      {
+        "params": [
+          "RANDOM"
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "PLAYER"
+      }, 
+      {
+        "params": [
+          "RANDOM"
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "ENEMY"
+      }, 
+      {
+        "params": [
+          "RANDOM"
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "ENEMY"
       }
     ]
   }

@@ -1,0 +1,36 @@
+<programa> ::= <tipo_juego> <grid> <definiciones> <eventos>
+
+<tipo_juego> ::= "GAME_TYPE" "TANKS"
+<grid>       ::= "GAME_GRID" "(" <numero> "," <numero> ")"
+<definiciones> ::= <definicion_shape> | <definicion_shape> <definiciones>
+<eventos>    ::= <evento> | <evento> <eventos>
+
+<definicion_shape>  ::= "DEFINE" "SHAPE" <identificador> ":" <contenido_shape> "END"
+<contenido_shape>   ::= <elemento_shape> | <elemento_shape> <contenido_shape>
+<elemento_shape>    ::= <estados> | <color> | <tipo_entidad> | <velocidad> | <resistencia>
+
+<tipo_entidad>      ::= "TYPE" <entidad>
+<estados>           ::= <estado> | <estado> <estados>
+<estado>            ::= "STATE" <numero> ":" <matriz>
+<matriz>            ::= <fila> | <fila> <matriz>
+
+<evento>           ::= "ON" <nombre_evento_tanks> ":" <acciones_tanks> "END"
+<nombre_evento_tanks> ::= "START" | "TICK" | "KEY_UP" | "KEY_DOWN" | "KEY_LEFT" | "KEY_RIGHT"
+<acciones_tanks>    ::= <accion_tanks> | <accion_tanks> <acciones_tanks>
+
+<accion_tanks> ::= <accion_spawn> | <accion_mover> | <accion_rotar> | <accion_puntos>
+<accion_spawn>  ::= "SPAWN" <entidad> | "SPAWN" <entidad> "AT" <coordenada> | "SPAWN" <entidad> "AT" "RANDOM"
+<accion_mover>  ::= "MOVE" "PLAYER" <direccion>
+<accion_rotar>  ::= "ROTATE" "CURRENT_PIECE"
+<accion_puntos> ::= "INCREASE_SCORE" <numero>
+
+<entidad>       ::= "PLAYER" | "ENEMY" | "BOSS"
+<coordenada>    ::= "(" <numero> "," <numero> ")"
+<direccion>     ::= "LEFT" | "RIGHT" | "DOWN" | "UP"
+<identificador> ::= <letra> | <letra> <identificador>
+<numero>        ::= <digito> | <digito> <numero>
+<letra>         ::= "A"..."Z" | "_"
+<digito>        ::= "0"..."9"
+<color>         ::= "Hexadecimal"
+<velocidad>            ::= "SPEED" <numero>
+<resistencia>          ::= "ENDURANCE" <numero>

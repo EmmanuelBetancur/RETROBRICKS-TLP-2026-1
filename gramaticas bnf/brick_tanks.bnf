@@ -1,6 +1,6 @@
 <programa> ::= <tipo_juego> <grid> <definiciones> <eventos>
 
-<tipo_juego> ::= "GAME TYPE" "BRICK_TANKS"
+<tipo_juego> ::= "GAME TYPE" "TANKS"
 <grid> ::= "GAME GRID" "(" "numero" "," "numero" ")"
 <definiciones> ::= <definiciones_shape> | <definicion_shape> <definiciones>
 <eventos> ::= <evento> |  <evento> <eventos>

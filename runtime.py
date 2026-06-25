@@ -85,10 +85,17 @@ class Juego:
                  '#4B0082',
                  '#9400D3'
                         ]
+        if self.tipo_juego == 'BRICK_TANKS':
+          self.velocidad_gravedad = 999999
+        if self.tipo_juego == 'TETRIS':
+            self.velocidad_gravedad = 0.4
+
+        if self.tipo_juego == 'SNAKE':
+            self.velocidad_gravedad = 0.15
+            
         self.timer_gravedad = 0
         self.ejecutar_evento('ON_START')
         self.timer_id = None # Para controlar el loop de Tkinter
-
     def run(self):
         # Inicia el ciclo principal de juego de Tkinter
         self.root.after(50, self.game_loop) 
@@ -144,13 +151,15 @@ class Juego:
 
         # Colores
         COLOR_GRID_FIJA = '#343434' # Gris oscuro para las celdas fijadas (Tetris)
+        COLOR_WALL = '#FFD700'
         if self.tipo_juego == 'TETRIS' and self.pieza_actual:
             COLOR_PIEZA = self.color_actual
-        COLOR_SNAKE_CABEZA = self.cabeza # Verde brillante
-        COLOR_SNAKE_CUERPO = self.cuerpo # Verde normal
-        COLOR_FOOD = '#FF0000'      # Rojo
-        COLOR_FRUIT = "#ECFC09"     # Amarillo
-        COLOR_POWER = "#0D09FC"     # Azul
+        if self.tipo_juego == 'SNAKE':
+         COLOR_SNAKE_CABEZA = self.cabeza # Verde brillante
+         COLOR_SNAKE_CUERPO = self.cuerpo # Verde normal
+         COLOR_FOOD = '#FF0000'      # Rojo
+         COLOR_FRUIT = "#ECFC09"     # Amarillo
+         COLOR_POWER = "#0D09FC"     # Azul
        
 
         # 1. Dibujar la cuadricula estatica (grid base)
@@ -223,8 +232,13 @@ class Juego:
                         if self.level=="NYAN_CAT" else COLOR_SNAKE_CUERPO
 
                     self.dibujar_cuerpo(x, y, color)
-
-
+        for y in range(self.alto):
+            for x in range(self.ancho):
+                 if self.grid[y][x] == 1:
+                   if self.tipo_juego == 'BRICK_TANKS':
+                        self.dibujar_celda(x, y, COLOR_WALL)
+                   else:
+                        self.dibujar_celda(x, y, COLOR_GRID_FIJA)
     #Dibujar la figura que toma el cuerpo
     def dibujar_cuerpo(self,x,y,color):
         ts = self.taman_celda # Alias para taman de celda
@@ -303,6 +317,7 @@ class Juego:
          fill='black')
 
 
+
     def ejecutar_evento(self, nombre_evento):
         if nombre_evento in self.datos_juego['events']:
             for accion in self.datos_juego['events'][nombre_evento]:
@@ -327,11 +342,20 @@ class Juego:
                     if verbo == 'SPAWN' and objeto == 'CLOUD'and self.level=="NYAN_CAT":
                         x, y = accion['params'][0]
                         self.nubes.append((x, y))
+                if self.tipo_juego == 'BRICK_TANKS':
+                     if verbo == 'SPAWN' and objeto == 'WALL':
+                          self.tank_spawn_wall(accion)
+            
+                
 
     # METODOS DE LOGICA DE JUEGO (MANTENIDOS DEL ARCHIVO ORIGINAL)
     # ---------------------------------------------------------------------
+    def tank_spawn_wall(self, accion):
+     x, y = accion['params'][0]
+     self.grid[y][x] = 1
 
     def tetris_spawn_pieza(self, tipo_spawn = "NORMAL"):
+      
 
       shapes = self.datos_juego['shapes']
 

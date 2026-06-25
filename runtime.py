@@ -146,11 +146,12 @@ class Juego:
         COLOR_GRID_FIJA = '#343434' # Gris oscuro para las celdas fijadas (Tetris)
         if self.tipo_juego == 'TETRIS' and self.pieza_actual:
             COLOR_PIEZA = self.color_actual
-        COLOR_SNAKE_CABEZA = self.cabeza # Verde brillante
-        COLOR_SNAKE_CUERPO = self.cuerpo # Verde normal
-        COLOR_FOOD = '#FF0000'      # Rojo
-        COLOR_FRUIT = "#ECFC09"     # Amarillo
-        COLOR_POWER = "#0D09FC"     # Azul
+        if self.tipo_juego== "SNAKE":
+         COLOR_SNAKE_CABEZA = self.cabeza # Verde brillante
+         COLOR_SNAKE_CUERPO = self.cuerpo # Verde normal
+         COLOR_FOOD = '#FF0000'      # Rojo
+         COLOR_FRUIT = "#ECFC09"     # Amarillo
+         COLOR_POWER = "#0D09FC"     # Azul
        
 
         # 1. Dibujar la cuadricula estatica (grid base)

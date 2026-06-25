@@ -1,0 +1,11 @@
+{
+  "shapes": {}, 
+  "tipo_juego": "TANKS", 
+  "config": {
+    "grid_size": [
+      18, 
+      18
+    ]
+  }, 
+  "events": {}
+}

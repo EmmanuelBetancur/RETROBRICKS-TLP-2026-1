@@ -1,11 +1,1319 @@
 {
-  "shapes": {}, 
+  "shapes": {
+    "RED_TANK": {
+      "body": "", 
+      "states": [
+        [
+          [
+            0, 
+            0, 
+            3, 
+            0, 
+            0
+          ], 
+          [
+            0, 
+            0, 
+            3, 
+            0, 
+            0
+          ], 
+          [
+            2, 
+            1, 
+            1, 
+            1, 
+            2
+          ], 
+          [
+            2, 
+            1, 
+            3, 
+            1, 
+            2
+          ], 
+          [
+            2, 
+            1, 
+            1, 
+            1, 
+            2
+          ]
+        ], 
+        [
+          [
+            2, 
+            2, 
+            2, 
+            0, 
+            0
+          ], 
+          [
+            1, 
+            1, 
+            1, 
+            0, 
+            0
+          ], 
+          [
+            1, 
+            3, 
+            1, 
+            3, 
+            3
+          ], 
+          [
+            1, 
+            1, 
+            1, 
+            0, 
+            0
+          ], 
+          [
+            2, 
+            2, 
+            2, 
+            0, 
+            0
+          ]
+        ], 
+        [
+          [
+            2, 
+            1, 
+            1, 
+            1, 
+            2
+          ], 
+          [
+            2, 
+            1, 
+            3, 
+            1, 
+            2
+          ], 
+          [
+            2, 
+            1, 
+            1, 
+            1, 
+            2
+          ], 
+          [
+            0, 
+            0, 
+            3, 
+            0, 
+            0
+          ], 
+          [
+            0, 
+            0, 
+            3, 
+            0, 
+            0
+          ]
+        ], 
+        [
+          [
+            0, 
+            0, 
+            2, 
+            2, 
+            2
+          ], 
+          [
+            0, 
+            0, 
+            1, 
+            1, 
+            1
+          ], 
+          [
+            3, 
+            3, 
+            1, 
+            3, 
+            1
+          ], 
+          [
+            0, 
+            0, 
+            1, 
+            1, 
+            1
+          ], 
+          [
+            0, 
+            0, 
+            2, 
+            2, 
+            2
+          ]
+        ]
+      ], 
+      "chance": 1, 
+      "level": "", 
+      "color": "#FF0033", 
+      "speed": 1, 
+      "endurance": 4, 
+      "type": "PLAYER", 
+      "power_up": ""
+    }, 
+    "GREEN_TANK": {
+      "body": "", 
+      "states": [
+        [
+          [
+            0, 
+            0, 
+            3, 
+            0, 
+            0
+          ], 
+          [
+            0, 
+            0, 
+            3, 
+            0, 
+            0
+          ], 
+          [
+            2, 
+            1, 
+            1, 
+            1, 
+            2
+          ], 
+          [
+            2, 
+            1, 
+            3, 
+            1, 
+            2
+          ], 
+          [
+            2, 
+            1, 
+            1, 
+            1, 
+            2
+          ]
+        ], 
+        [
+          [
+            2, 
+            2, 
+            2, 
+            0, 
+            0
+          ], 
+          [
+            1, 
+            1, 
+            1, 
+            0, 
+            0
+          ], 
+          [
+            1, 
+            3, 
+            1, 
+            3, 
+            3
+          ], 
+          [
+            1, 
+            1, 
+            1, 
+            0, 
+            0
+          ], 
+          [
+            2, 
+            2, 
+            2, 
+            0, 
+            0
+          ]
+        ], 
+        [
+          [
+            2, 
+            1, 
+            1, 
+            1, 
+            2
+          ], 
+          [
+            2, 
+            1, 
+            3, 
+            1, 
+            2
+          ], 
+          [
+            2, 
+            1, 
+            1, 
+            1, 
+            2
+          ], 
+          [
+            0, 
+            0, 
+            3, 
+            0, 
+            0
+          ], 
+          [
+            0, 
+            0, 
+            3, 
+            0, 
+            0
+          ]
+        ], 
+        [
+          [
+            0, 
+            0, 
+            2, 
+            2, 
+            2
+          ], 
+          [
+            0, 
+            0, 
+            1, 
+            1, 
+            1
+          ], 
+          [
+            3, 
+            3, 
+            1, 
+            3, 
+            1
+          ], 
+          [
+            0, 
+            0, 
+            1, 
+            1, 
+            1
+          ], 
+          [
+            0, 
+            0, 
+            2, 
+            2, 
+            2
+          ]
+        ]
+      ], 
+      "chance": 1, 
+      "level": "", 
+      "color": "#15ff00", 
+      "speed": 1, 
+      "endurance": 3, 
+      "type": "ENEMY", 
+      "power_up": ""
+    }, 
+    "BLUE_TANK": {
+      "body": "", 
+      "states": [
+        [
+          [
+            0, 
+            3, 
+            0
+          ], 
+          [
+            0, 
+            3, 
+            0
+          ], 
+          [
+            2, 
+            1, 
+            2
+          ], 
+          [
+            1, 
+            1, 
+            1
+          ], 
+          [
+            2, 
+            1, 
+            2
+          ]
+        ], 
+        [
+          [
+            2, 
+            1, 
+            2, 
+            0, 
+            0
+          ], 
+          [
+            1, 
+            1, 
+            1, 
+            3, 
+            3
+          ], 
+          [
+            2, 
+            1, 
+            2, 
+            0, 
+            0
+          ]
+        ], 
+        [
+          [
+            2, 
+            1, 
+            2
+          ], 
+          [
+            1, 
+            1, 
+            1
+          ], 
+          [
+            2, 
+            1, 
+            2
+          ], 
+          [
+            0, 
+            3, 
+            0
+          ], 
+          [
+            0, 
+            3, 
+            0
+          ]
+        ], 
+        [
+          [
+            0, 
+            0, 
+            2, 
+            1, 
+            2
+          ], 
+          [
+            3, 
+            3, 
+            1, 
+            1, 
+            1
+          ], 
+          [
+            0, 
+            0, 
+            2, 
+            1, 
+            2
+          ]
+        ]
+      ], 
+      "chance": 1, 
+      "level": "", 
+      "color": "#5900ff", 
+      "speed": 1, 
+      "endurance": 2, 
+      "type": "ENEMY", 
+      "power_up": ""
+    }
+  }, 
   "tipo_juego": "TANKS", 
   "config": {
     "grid_size": [
-      18, 
-      18
+      50, 
+      50
     ]
   }, 
-  "events": {}
+  "events": {
+    "ON_KEY_DOWN": [
+      {
+        "params": [], 
+        "accion": "MOVE_DIRECTION", 
+        "objeto": "DOWN"
+      }
+    ], 
+    "ON_CURA": [
+      {
+        "params": [], 
+        "accion": "SPAWN", 
+        "objeto": "CURA"
+      }
+    ], 
+    "ON_KEY_UP": [
+      {
+        "params": [], 
+        "accion": "MOVE_DIRECTION", 
+        "objeto": "UP"
+      }
+    ], 
+    "ON_TICK": [
+      {
+        "params": [
+          "FORWARD"
+        ], 
+        "accion": "MOVE", 
+        "objeto": "ENEMY"
+      }
+    ], 
+    "ON_START": [
+      {
+        "params": [
+          [
+            10, 
+            12
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            11, 
+            12
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            12, 
+            12
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            13, 
+            12
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            14, 
+            12
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            15, 
+            12
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            16, 
+            12
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            17, 
+            12
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            10, 
+            13
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            11, 
+            13
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            12, 
+            13
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            13, 
+            13
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            14, 
+            13
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            15, 
+            13
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            16, 
+            13
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            17, 
+            13
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            32, 
+            12
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            33, 
+            12
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            34, 
+            12
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            35, 
+            12
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            36, 
+            12
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            37, 
+            12
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            38, 
+            12
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            39, 
+            12
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            32, 
+            13
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            33, 
+            13
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            34, 
+            13
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            35, 
+            13
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            36, 
+            13
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            37, 
+            13
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            38, 
+            13
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            39, 
+            13
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            10, 
+            25
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            11, 
+            25
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            12, 
+            25
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            13, 
+            25
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            14, 
+            25
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            15, 
+            25
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            16, 
+            25
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            17, 
+            25
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            10, 
+            26
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            11, 
+            26
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            12, 
+            26
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            13, 
+            26
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            14, 
+            26
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            15, 
+            26
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            16, 
+            26
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            17, 
+            26
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            32, 
+            25
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            33, 
+            25
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            34, 
+            25
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            35, 
+            25
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            36, 
+            25
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            37, 
+            25
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            38, 
+            25
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            39, 
+            25
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            32, 
+            26
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            33, 
+            26
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            34, 
+            26
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            35, 
+            26
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            36, 
+            26
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            37, 
+            26
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            38, 
+            26
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            39, 
+            26
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            24, 
+            31
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            24, 
+            32
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            24, 
+            33
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            24, 
+            34
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            24, 
+            35
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            24, 
+            36
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            24, 
+            37
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            24, 
+            38
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            25, 
+            31
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            25, 
+            32
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            25, 
+            33
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            25, 
+            34
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            25, 
+            35
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            25, 
+            36
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            25, 
+            37
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          [
+            25, 
+            38
+          ]
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "WALL"
+      }, 
+      {
+        "params": [
+          "RANDOM"
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "CURA"
+      }, 
+      {
+        "params": [
+          "RANDOM"
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "PLAYER"
+      }, 
+      {
+        "params": [
+          "RANDOM"
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "ENEMY"
+      }, 
+      {
+        "params": [
+          "RANDOM"
+        ], 
+        "accion": "SPAWN", 
+        "objeto": "ENEMY"
+      }
+    ], 
+    "ON_KEY_RIGHT": [
+      {
+        "params": [], 
+        "accion": "MOVE_DIRECTION", 
+        "objeto": "RIGHT"
+      }
+    ], 
+    "ON_KEY_LEFT": [
+      {
+        "params": [], 
+        "accion": "MOVE_DIRECTION", 
+        "objeto": "LEFT"
+      }
+    ]
+  }
 }

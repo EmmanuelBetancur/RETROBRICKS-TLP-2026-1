@@ -2,8 +2,6 @@
   "shapes": {
     "C_PIECE": {
       "body": "", 
-      "level": "", 
-      "color": "#00CC66", 
       "states": [
         [
           [
@@ -84,8 +82,6 @@
     }, 
     "Z_PIECE": {
       "body": "", 
-      "level": "", 
-      "color": "#FF0033", 
       "states": [
         [
           [
@@ -193,12 +189,15 @@
         ]
       ], 
       "chance": 30, 
+      "level": "", 
+      "color": "#FF0033", 
+      "speed": 0, 
+      "endurance": 0, 
+      "type": "", 
       "power_up": ""
     }, 
     "POWER_UP_PIECE": {
       "body": "", 
-      "level": "", 
-      "color": "#FFFFFF", 
       "states": [
         [
           [
@@ -207,12 +206,15 @@
         ]
       ], 
       "chance": 0, 
+      "level": "", 
+      "color": "#FFFFFF", 
+      "speed": 0, 
+      "endurance": 0, 
+      "type": "", 
       "power_up": ""
     }, 
     "V_PIECE": {
       "body": "", 
-      "level": "", 
-      "color": "#FFFF00", 
       "states": [
         [
           [
@@ -268,12 +270,15 @@
         ]
       ], 
       "chance": 50, 
+      "level": "", 
+      "color": "#FFFF00", 
+      "speed": 0, 
+      "endurance": 0, 
+      "type": "", 
       "power_up": ""
     }, 
     "L_PIECE": {
       "body": "", 
-      "level": "", 
-      "color": "#FF8800", 
       "states": [
         [
           [
@@ -345,12 +350,15 @@
         ]
       ], 
       "chance": 50, 
+      "level": "", 
+      "color": "#FF8800", 
+      "speed": 0, 
+      "endurance": 0, 
+      "type": "", 
       "power_up": ""
     }, 
     "T_PIECE": {
       "body": "", 
-      "level": "", 
-      "color": "#AA00FF", 
       "states": [
         [
           [
@@ -422,12 +430,15 @@
         ]
       ], 
       "chance": 50, 
+      "level": "", 
+      "color": "#AA00FF", 
+      "speed": 0, 
+      "endurance": 0, 
+      "type": "", 
       "power_up": ""
     }, 
     "I_PIECE": {
       "body": "", 
-      "level": "", 
-      "color": "#00FFFF", 
       "states": [
         [
           [
@@ -535,6 +546,11 @@
         ]
       ], 
       "chance": 50, 
+      "level": "", 
+      "color": "#00FFFF", 
+      "speed": 0, 
+      "endurance": 0, 
+      "type": "", 
       "power_up": ""
     }
   }, 

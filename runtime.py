@@ -92,6 +92,8 @@ class Juego:
         if self.tipo_juego == "TANKS":
             self.player_tanks = None
             self.enemy_tanks = []
+            self.tank_walls=[]
+            self.pos_cura=None
         self.timer_gravedad = 0
         self.ejecutar_evento('ON_START')
         if self.tipo_juego == "TANKS": self.tanks_generar_bordes()
@@ -143,6 +145,12 @@ class Juego:
             elif key == 'DOWN': self.snake_cambiar_direccion('DOWN')
             elif key == 'LEFT': self.snake_cambiar_direccion('LEFT')
             elif key == 'RIGHT': self.snake_cambiar_direccion('RIGHT')
+        elif self.tipo_juego=='TANKS':
+            if key == 'UP': self.tanks_movimiento_player('UP')
+            elif key == 'DOWN': self.tanks_movimiento_player('DOWN')
+            elif key == 'LEFT': self.tanks_movimiento_player('LEFT')
+            elif key == 'RIGHT': self.tanks_movimiento_player('RIGHT')
+
 
 
     def dibujar(self):
@@ -245,8 +253,12 @@ class Juego:
                         self.dibujar_celda(x, y, COLOR_WALL)
                    else:
                         self.dibujar_celda(x, y, COLOR_GRID_FIJA)
+        
 
         if self.tipo_juego == "TANKS":
+            if self.pos_cura:
+             x,y=self.pos_cura
+             self.dibujar_llave(x,y)
 
             if self.player_tanks:
                 self.dibujar_tanque(
@@ -262,7 +274,9 @@ class Juego:
                     enemigo['y'],
                     enemigo['shape'],
                     enemigo
-                )           
+                ) 
+            self.tanks_movimiento_enemy()       
+
 
 
     #Dibujar la figura que toma el cuerpo
@@ -341,6 +355,40 @@ class Juego:
          x1 + ts*0.75,
          y1 + ts*0.40,
          fill='black')
+
+    def dibujar_llave(self, x, y):
+     x=x*self.taman_celda
+     y=y*self.taman_celda
+     color="#707070"
+     escala=0.3
+     # Mango
+     self.canvas.create_line(
+         x, y,
+         x+45*escala, y-45*escala,
+         width=5*escala,
+         capstyle=tk.ROUND,
+         fill=color
+     )
+
+    # Agujero
+     self.canvas.create_oval(
+         x-8*escala, y-8*escala,
+         x+8*escala, y+8*escala,
+         fill="white",
+         outline=color,
+         width=3*escala
+     )
+
+    # Cabeza
+     self.canvas.create_arc(
+         x+30*escala, y-75*escala,
+         x+80*escala, y-25*escala,
+         start=40,
+         extent=280,
+         style=tk.ARC,
+         width=14*escala,
+         outline=color
+     )
 
     #Dibujar tanques de tanks
     def dibujar_tanque(self, x, y, shape, tanque):
@@ -460,14 +508,16 @@ class Juego:
                         self.nubes.append((x, y))
                 if self.tipo_juego == 'TANKS':
                     if verbo == 'SPAWN' and objeto == 'PLAYER': self.tanks_spawn_player()
-                    if verbo == 'SPAWN' and objeto == 'ENEMY' : 
-                        self.tanks_spawn_enemy()   
-                    if verbo == 'SPAWN' and objeto == 'WALL'  : self.tank_spawn_wall(accion)                
+                    if verbo == 'SPAWN' and objeto == 'ENEMY' :  self.tanks_spawn_enemy()   
+                    if verbo == 'SPAWN' and objeto == 'WALL'  : self.tank_spawn_wall(accion)
+                    if verbo == 'SPAWN' and objeto == 'CURA'  : threading.Timer(2, self.tanks_spawn_cura).start()
+                             
 
     # METODOS DE LOGICA DE JUEGO (MANTENIDOS DEL ARCHIVO ORIGINAL)
     # ---------------------------------------------------------------------
     def tank_spawn_wall(self, accion):
      x, y = accion['params'][0]
+     self.tank_walls.append((x,y))
      self.grid[y][x] = 1
 
     def tanks_spawn_wall(self, x, y):
@@ -630,6 +680,16 @@ class Juego:
                 self.pos_power = (x, y)
                 break
 
+    def tanks_spawn_cura(self):
+        while True:
+            x, y = random.randint(0, self.ancho -1), random.randint(0, self.alto -1)
+            
+            if (x, y) != ((self.player_tanks['x'],self.player_tanks['y']))and (x,y) not in (self.tank_walls):
+                self.pos_cura = (x, y)
+                break
+            
+
+
     def snake_mover_jugador(self):
         if not self.serpiente_cuerpo: return
         cabeza_x, cabeza_y = self.serpiente_cuerpo[0]
@@ -719,6 +779,166 @@ class Juego:
             self.serpiente_direccion = (-1, 0)
         elif direccion == 'RIGHT' and self.serpiente_direccion[0] != -1:
             self.serpiente_direccion = (1, 0)
+
+    def tanks_movimiento_player(self, direccion):
+        x,y=self.player_tanks['x'],self.player_tanks['y']
+        v=0.9
+        if direccion == 'UP' and (self.tanks_colision_player("y",-v)) :       
+           self.player_tanks['y']=y-v
+           self.player_tanks['rotation']=0
+        elif direccion == 'DOWN' and (self.tanks_colision_player("y",v)) :
+            self.player_tanks['y']=y+v
+            self.player_tanks['rotation']=2
+        elif direccion == 'LEFT' and (self.tanks_colision_player("x",-v)):
+            self.player_tanks['x']=x-v
+            self.player_tanks['rotation']=3
+        elif direccion == 'RIGHT' and (self.tanks_colision_player("x",v)) :
+            self.player_tanks['x']=x+v
+            self.player_tanks['rotation']=1
+
+        print(self.pos_cura)
+        print((x,y))
+
+        if self.pos_cura:
+         x1,y1=self.pos_cura
+         if ((x1-x)**2 + (y1-y)**2) <= 4.5**2:
+             self.player_tanks['endurance']+=1
+             self.efecto_particulas(
+                 self.player_tanks['x'],
+                 self.player_tanks['y']
+               )
+             self.pos_cura=None
+             threading.Timer(7, self.tanks_spawn_cura).start()
+             
+
+    def efecto_particulas(self, x, y):
+
+    # Convertir de coordenadas del grid a píxeles
+     x *= self.taman_celda
+     y *= self.taman_celda
+
+     particulas = []
+
+    # Crear partículas
+     for _ in range(25):
+
+          r = random.randint(6, 10)
+
+          pid = self.canvas.create_oval(
+             x-r,
+             y-r,
+             x+r,
+             y+r,
+             fill="#19389e",
+             outline="",
+             tags="heal_particles"
+           )
+          self.canvas.tag_raise(pid)
+
+          particulas.append({
+             "id": pid,
+             "vx": random.uniform(-1.5, 1.5),
+             "vy": random.uniform(-1.2, -0.5),
+             "vida": 105
+           })
+
+     def animar():
+
+         eliminar = []
+
+         for p in particulas:
+
+             self.canvas.move(
+                 p["id"],
+                 p["vx"],
+                 p["vy"]
+             )
+
+             p["vida"] -= 1
+
+             if p["vida"] <= 0:
+                 eliminar.append(p)
+
+         for p in eliminar:
+             self.canvas.delete(p["id"])
+             particulas.remove(p)
+
+         if particulas:
+             self.canvas.after(50, animar)
+
+     animar()
+
+
+
+
+
+
+    def tanks_movimiento_enemy(self):
+        for i in range ((len(self.enemy_tanks))):
+         rotacion=self.enemy_tanks[i]['rotation']
+         velocidad=self.enemy_tanks[i]['speed']
+         if rotacion==0:
+             if self.tanks_colision_enemy("y",-velocidad,i): 
+                 self.enemy_tanks[i]['y']-=velocidad
+             else:
+                 self.enemy_tanks[i]['rotation']=2
+                 self.enemy_tanks[i]['y']+=velocidad
+         elif rotacion==2:
+             if self.tanks_colision_enemy("y",velocidad,i): 
+                 self.enemy_tanks[i]['y']+=velocidad
+             else:
+                 self.enemy_tanks[i]['rotation']=0
+                 self.enemy_tanks[i]['y']-=velocidad
+         elif rotacion==1:
+             if self.tanks_colision_enemy("x",-velocidad,i): 
+                 self.enemy_tanks[i]['x']-=velocidad
+             else:
+                 self.enemy_tanks[i]['rotation']=3
+                 self.enemy_tanks[i]['x']+=velocidad
+         elif rotacion==3:
+             if self.tanks_colision_enemy("x",velocidad,i): 
+                 self.enemy_tanks[i]['x']+=velocidad
+             else:
+                 self.enemy_tanks[i]['rotation']=1
+                 self.enemy_tanks[i]['x']-=velocidad
+
+             
+    def tanks_colision_enemy(self,variable,valor,posicion):
+        x,y=self.enemy_tanks[posicion]['x'],self.enemy_tanks[posicion]['y']
+        if (x-5<=self.player_tanks['x']<=x+5)and(y-5<=self.player_tanks['y']<=y+5):
+            return False
+        for i in range(len(self.tank_walls)-1):
+            x1,y1=self.tank_walls[i]
+            if (variable=="y") and (x1-4 <= x < x1)and (y1-4 <= y+valor*2 < y1):
+              return False
+            elif (variable=="x") and (y1-4 <= y < y1) and (x1-4 <= x+valor*2 < x1):
+              return False
+        else:
+          if (variable=="x" and (0 <= x+valor*2 < self.ancho-4.97)):
+             return True
+          elif (variable=="y" and (0 <= y+valor*2 < self.alto-5)):
+             return True
+          else:
+             return False
+
+    def tanks_colision_player(self,variable,valor):
+        x=self.player_tanks['x']
+        y=self.player_tanks['y']
+        for i in range(len(self.tank_walls)-1):
+            x1,y1=self.tank_walls[i]
+            if (variable=="y") and (x1-4 <= x < x1)and (y1-4 <= y+valor*2 < y1):
+              return False
+            elif (variable=="x") and (y1-4 <= y < y1) and (x1-4 <= x+valor*2 < x1):
+              return False
+
+        if (variable=="x") and (0 <= x+valor*2 < self.ancho-4.97):
+            return True
+        elif (variable=="y") and (0 <= y+valor*2 < self.alto-5):
+            return True
+        else:
+            return False
+                                  
+
 
     def snake_crecer(self):
         pass

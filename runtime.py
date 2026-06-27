@@ -813,13 +813,15 @@ class Juego:
             self.player_tanks['x']=x+v
             self.player_tanks['rotation']=1
 
-        print(self.pos_cura)
-        print((x,y))
+        #debug
+        #print(self.pos_cura)
+        #print((x,y))
 
         if self.pos_cura:
          x1,y1=self.pos_cura
          if ((x1-x)**2 + (y1-y)**2) <= 4.5**2:
              self.player_tanks['endurance']+=1
+             self.ejecutar_evento("ON_LIVE_UP")
              self.efecto_particulas(
                  self.player_tanks['x'],
                  self.player_tanks['y']

@@ -1309,6 +1309,13 @@
         "objeto": "RIGHT"
       }
     ], 
+    "ON_LIVE_UP": [
+      {
+        "params": [], 
+        "accion": "INCREASE_SCORE", 
+        "objeto": "10"
+      }
+    ], 
     "ON_KEY_LEFT": [
       {
         "params": [], 

@@ -205,6 +205,8 @@ ON START:
     
 END
 
+#Movimiento
+
 ON TICK:
   MOVE ENEMY FORWARD
 END
@@ -221,6 +223,13 @@ END
 ON KEY_RIGHT:
   MOVE_DIRECTION RIGHT
 END
+
+#Eventos de logica de juego
+
 ON CURA:
-    SPAWN CURA
+  SPAWN CURA
+END
+
+ON LIVE_UP:
+  INCREASE_SCORE 10
 END

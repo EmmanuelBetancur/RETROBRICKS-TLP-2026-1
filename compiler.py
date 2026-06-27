@@ -25,6 +25,8 @@ class Parser:
                 self.parsear_tipo_juego()
             elif token_actual == 'GAME_GRID':
                 self.parsear_grid()
+            elif token_actual=='PLAYER':
+                self.parsear_player()
             elif token_actual == 'DEFINE':
                 self.parsear_shape()
             elif token_actual == 'ON':
@@ -56,6 +58,12 @@ class Parser:
         alto = int(self.consumir())
         self.consumir(')')
         self.ast['config']['grid_size'] = [ancho, alto]
+    def parsear_player(self):
+        self.consumir('PLAYER')
+        self.consumir('LIVES')
+
+        vidas = int(self.consumir())
+        self.ast['config']['lives'] = vidas
 
     def parsear_shape(self):
      self.consumir('DEFINE')

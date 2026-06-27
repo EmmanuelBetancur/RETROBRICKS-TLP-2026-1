@@ -19,6 +19,7 @@ class Juego:
         config = self.datos_juego.get('config', {})
         self.ancho = config.get('grid_size', [10, 20])[0]
         self.alto = config.get('grid_size', [10, 20])[1]
+        self.lives = config.get('lives', 3)
         self.grid = [[0 for _ in range(self.ancho)] for _ in range(self.alto)]
         self.puntuacion = 0 
         self.color_act='#FF0000'
@@ -47,6 +48,10 @@ class Juego:
         
         self.label_score = tk.Label(self.marco_score, text="PUNTUACION\n0", bg='#222222', fg='white', font=('Consolas', 16, 'bold'))
         self.label_score.pack(pady=40, padx=10)
+
+        if self.tipo_juego == 'TANKS':
+           self.label_lives =tk.Label (self.marco_score, text="❤ " * self.lives, bg='#222222', fg='red',font=('Arial',18,'bold'))
+           self.label_lives.pack(pady=10)
         
         # Nota: Se ha eliminado 'Q: Salir' de los controles en pantalla
         self.label_controles = tk.Label(self.marco_score, text="CONTROLES\nFlechas: Mover/Rotar", bg='#222222', fg='gray', font=('Consolas', 10))
@@ -321,6 +326,18 @@ class Juego:
         x1, y1 = x * ts, y * ts
         x2, y2 = x1 + ts, y1 + ts
         self.canvas.create_rectangle(x1, y1, x2, y2, fill=color, outline='#000000')
+
+    def actualizar_vidas(self):
+        self.label_lives.config(text="❤ " * self.lives )
+    def perder_vida(self):
+
+        self.lives -= 1
+
+        self.actualizar_vidas()
+
+        if self.lives <= 0:
+             self.juego_terminado = True
+
     #Dibujar cabeza nivel Nyan_Cat
     def dibujar_circulo(self, x, y, color):
 

@@ -435,6 +435,7 @@
   }, 
   "tipo_juego": "TANKS", 
   "config": {
+    "lives": 3, 
     "grid_size": [
       50, 
       50

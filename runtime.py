@@ -99,6 +99,9 @@ class Juego:
             self.enemy_tanks = []
             self.tank_walls=[]
             self.pos_cura=None
+            self.bullets=[]
+            self.enemy_timer=0
+            self.player_timer=0
         self.timer_gravedad = 0
         self.ejecutar_evento('ON_START')
         if self.tipo_juego == "TANKS": self.tanks_generar_bordes()
@@ -119,6 +122,16 @@ class Juego:
         if self.timer_gravedad >= self.velocidad_gravedad:
             self.timer_gravedad = 0
             self.ejecutar_evento('ON_TICK')
+        if self.tipo_juego == "TANKS":
+
+             self.enemy_timer += 0.05
+             self.player_timer += 0.05
+
+        if self.enemy_timer >= 1:
+              self.enemy_timer = 0
+              self.tanks_disparo_enemy()
+
+        self.tanks_mover_balas()
 
         self.dibujar()
 
@@ -155,6 +168,8 @@ class Juego:
             elif key == 'DOWN': self.tanks_movimiento_player('DOWN')
             elif key == 'LEFT': self.tanks_movimiento_player('LEFT')
             elif key == 'RIGHT': self.tanks_movimiento_player('RIGHT')
+            elif key == 'SPACE':
+                self.tanks_disparo_player()
 
 
 
@@ -281,6 +296,15 @@ class Juego:
                     enemigo
                 ) 
             self.tanks_movimiento_enemy()       
+            for bala in self.bullets:
+
+              self.canvas.create_oval(
+              bala["x"]*self.taman_celda,
+              bala["y"]*self.taman_celda,
+              bala["x"]*self.taman_celda+5,
+              bala["y"]*self.taman_celda+5,
+             fill="white"
+    )
 
 
 
@@ -1011,7 +1035,105 @@ class Juego:
             'rotation': 0,
             'shape': enemy_shape
         })
+    def tanks_disparo_player(self):
 
+     if self.player_timer < 1:
+        return
+
+     self.player_timer = 0
+
+     tanque = self.player_tanks
+
+     dx = 0
+     dy = 0
+
+     if tanque['rotation'] == 0:
+        dy = -1
+     elif tanque['rotation'] == 1:
+        dx = 1
+     elif tanque['rotation'] == 2:
+        dy = 1
+     elif tanque['rotation'] == 3:
+        dx = -1
+
+     self.bullets.append({
+        "x": tanque['x'] + 2,
+        "y": tanque['y'] + 2,
+        "dx": dx,
+        "dy": dy,
+        "owner": "player"
+    })
+    def tanks_disparo_enemy(self):
+
+      for tanque in self.enemy_tanks:
+
+        dx = 0
+        dy = 0
+
+        if tanque['rotation'] == 0:
+            dy = -1
+        elif tanque['rotation'] == 1:
+            dx = 1
+        elif tanque['rotation'] == 2:
+            dy = 1
+        elif tanque['rotation'] == 3:
+            dx = -1
+
+        self.bullets.append({
+            "x": tanque['x'] + 2,
+            "y": tanque['y'] + 2,
+            "dx": dx,
+            "dy": dy,
+            "owner": "enemy"
+        })
+    def tanks_mover_balas(self):
+
+     eliminar = []
+
+     for bala in self.bullets:
+
+        bala["x"] += bala["dx"]
+        bala["y"] += bala["dy"]
+
+        if bala["x"] < 0 or bala["x"] >= self.ancho:
+            eliminar.append(bala)
+            continue
+
+        if bala["y"] < 0 or bala["y"] >= self.alto:
+            eliminar.append(bala)
+            continue
+
+        if self.grid[int(bala["y"])][int(bala["x"])] == 1:
+            eliminar.append(bala)
+            continue
+
+        if bala["owner"] == "player":
+
+            for enemigo in self.enemy_tanks[:]:
+
+                if abs(bala["x"]-enemigo["x"]) < 4 and abs(bala["y"]-enemigo["y"]) < 4:
+
+                    enemigo["endurance"] -= 1
+                    eliminar.append(bala)
+
+                    if enemigo["endurance"] <= 0:
+                        self.enemy_tanks.remove(enemigo)
+
+                    break
+
+        else:
+
+            if abs(bala["x"]-self.player_tanks["x"]) < 4 and abs(bala["y"]-self.player_tanks["y"]) < 4:
+
+                self.player_tanks["endurance"] -= 1
+                eliminar.append(bala)
+
+                self.perder_vida()
+
+     for bala in eliminar:
+
+        if bala in self.bullets:
+            self.bullets.remove(bala)
     def tanks_generar_bordes(self):
 
         # Superior e inferior
